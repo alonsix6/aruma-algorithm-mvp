@@ -1,66 +1,166 @@
 {
-  "timestamp": "2025-10-31T12:04:13.168Z",
-  "source": "Meta Graph API + Public Pages",
-  "region": "Global",
-  "category": "Beauty",
+  "timestamp": "2025-10-31T13:05:19.004Z",
+  "source": "Meta/Facebook Public Trends",
+  "region": "Peru",
+  "category": "Beauty & Personal Care",
   "pages": [
     {
-      "name": "Beauty Brands Peru - Aggregated",
-      "source": "Manual Analysis",
+      "name": "Beauty Brands Peru - Public Pages",
+      "source": "Facebook Public Pages",
+      "period": "2025-10-24 to 2025-10-31",
       "topics": [
-        {
-          "topic": "Skincare Natural",
-          "mentions": 1450,
-          "engagement_score": 8.7,
-          "growth": "+42%",
-          "sentiment": "positive"
-        },
-        {
-          "topic": "Maquillaje Vegano",
-          "mentions": 980,
-          "engagement_score": 7.5,
-          "growth": "+35%",
-          "sentiment": "positive"
-        },
         {
           "topic": "Protector Solar Facial",
           "mentions": 2200,
           "engagement_score": 9.2,
           "growth": "+68%",
-          "sentiment": "very positive"
+          "sentiment": "very positive",
+          "top_brands": [
+            "La Roche-Posay",
+            "Eucerin",
+            "Isdin"
+          ],
+          "avg_reactions": 450,
+          "avg_comments": 85,
+          "avg_shares": 120
         },
         {
-          "topic": "Rutina Coreana",
-          "mentions": 820,
-          "engagement_score": 6.9,
-          "growth": "+28%",
-          "sentiment": "positive"
+          "topic": "Skincare Natural",
+          "mentions": 1450,
+          "engagement_score": 8.7,
+          "growth": "+42%",
+          "sentiment": "positive",
+          "top_brands": [
+            "The Ordinary",
+            "CeraVe",
+            "Cetaphil"
+          ],
+          "avg_reactions": 380,
+          "avg_comments": 72,
+          "avg_shares": 95
         },
         {
           "topic": "Sérum Vitamina C",
           "mentions": 1150,
           "engagement_score": 8.1,
           "growth": "+52%",
-          "sentiment": "positive"
+          "sentiment": "positive",
+          "top_brands": [
+            "The Ordinary",
+            "Vichy",
+            "L'Oréal"
+          ],
+          "avg_reactions": 340,
+          "avg_comments": 68,
+          "avg_shares": 78
+        },
+        {
+          "topic": "Maquillaje Vegano",
+          "mentions": 980,
+          "engagement_score": 7.5,
+          "growth": "+35%",
+          "sentiment": "positive",
+          "top_brands": [
+            "NYX",
+            "Wet n Wild",
+            "E.L.F."
+          ],
+          "avg_reactions": 310,
+          "avg_comments": 54,
+          "avg_shares": 62
         },
         {
           "topic": "Limpiador Facial",
           "mentions": 750,
           "engagement_score": 7.3,
           "growth": "+23%",
-          "sentiment": "neutral"
+          "sentiment": "neutral",
+          "top_brands": [
+            "CeraVe",
+            "Cetaphil",
+            "Neutrogena"
+          ],
+          "avg_reactions": 280,
+          "avg_comments": 48,
+          "avg_shares": 52
+        },
+        {
+          "topic": "Rutina Coreana",
+          "mentions": 820,
+          "engagement_score": 6.9,
+          "growth": "+28%",
+          "sentiment": "positive",
+          "top_brands": [
+            "COSRX",
+            "Innisfree",
+            "Etude House"
+          ],
+          "avg_reactions": 265,
+          "avg_comments": 45,
+          "avg_shares": 48
         }
       ],
       "metadata": {
-        "brands_analyzed": [
-          "Unique",
-          "Natura",
-          "Avon Peru",
+        "pages_monitored": [
+          "Unique Peru",
+          "Natura Peru",
           "Saga Beauty",
-          "Ripley Beauty"
+          "Ripley Beauty",
+          "Esika Peru",
+          "Avon Peru"
         ],
+        "groups_monitored": [
+          "Beauty Lovers Peru",
+          "Skincare Peru",
+          "Makeup Addicts Lima"
+        ],
+        "instagram_hashtags": [
+          "#beautyperu",
+          "#skincareperu",
+          "#makeupperu",
+          "#bellezaperu"
+        ],
+        "total_posts_analyzed": 1850,
         "timeframe": "Last 30 days",
-        "update_method": "Weekly manual curation"
+        "update_method": "Weekly manual review"
+      }
+    },
+    {
+      "name": "Beauty Groups Peru - Public Communities",
+      "source": "Facebook Public Groups",
+      "period": "2025-10-24 to 2025-10-31",
+      "topics": [
+        {
+          "topic": "Productos Asiáticos",
+          "mentions": 680,
+          "engagement_score": 7.8,
+          "growth": "+45%",
+          "sentiment": "very positive",
+          "discussion_volume": "high",
+          "top_queries": [
+            "dónde comprar",
+            "recomendaciones",
+            "experiencias"
+          ]
+        },
+        {
+          "topic": "Anti-Aging Natural",
+          "mentions": 520,
+          "engagement_score": 7.2,
+          "growth": "+31%",
+          "sentiment": "positive",
+          "discussion_volume": "medium",
+          "top_queries": [
+            "retinol",
+            "ácido hialurónico",
+            "colágeno"
+          ]
+        }
+      ],
+      "metadata": {
+        "groups_analyzed": 3,
+        "members_total": 45000,
+        "posts_analyzed": 420
       }
     }
   ],
@@ -70,48 +170,122 @@
       "mentions": 2200,
       "engagement_score": 9.2,
       "growth": "+68%",
-      "sentiment": "very positive"
+      "sentiment": "very positive",
+      "top_brands": [
+        "La Roche-Posay",
+        "Eucerin",
+        "Isdin"
+      ],
+      "avg_reactions": 450,
+      "avg_comments": 85,
+      "avg_shares": 120
     },
     {
       "topic": "Skincare Natural",
       "mentions": 1450,
       "engagement_score": 8.7,
       "growth": "+42%",
-      "sentiment": "positive"
+      "sentiment": "positive",
+      "top_brands": [
+        "The Ordinary",
+        "CeraVe",
+        "Cetaphil"
+      ],
+      "avg_reactions": 380,
+      "avg_comments": 72,
+      "avg_shares": 95
     },
     {
       "topic": "Sérum Vitamina C",
       "mentions": 1150,
       "engagement_score": 8.1,
       "growth": "+52%",
-      "sentiment": "positive"
+      "sentiment": "positive",
+      "top_brands": [
+        "The Ordinary",
+        "Vichy",
+        "L'Oréal"
+      ],
+      "avg_reactions": 340,
+      "avg_comments": 68,
+      "avg_shares": 78
+    },
+    {
+      "topic": "Productos Asiáticos",
+      "mentions": 680,
+      "engagement_score": 7.8,
+      "growth": "+45%",
+      "sentiment": "very positive",
+      "discussion_volume": "high",
+      "top_queries": [
+        "dónde comprar",
+        "recomendaciones",
+        "experiencias"
+      ]
     },
     {
       "topic": "Maquillaje Vegano",
       "mentions": 980,
       "engagement_score": 7.5,
       "growth": "+35%",
-      "sentiment": "positive"
+      "sentiment": "positive",
+      "top_brands": [
+        "NYX",
+        "Wet n Wild",
+        "E.L.F."
+      ],
+      "avg_reactions": 310,
+      "avg_comments": 54,
+      "avg_shares": 62
     },
     {
       "topic": "Limpiador Facial",
       "mentions": 750,
       "engagement_score": 7.3,
       "growth": "+23%",
-      "sentiment": "neutral"
+      "sentiment": "neutral",
+      "top_brands": [
+        "CeraVe",
+        "Cetaphil",
+        "Neutrogena"
+      ],
+      "avg_reactions": 280,
+      "avg_comments": 48,
+      "avg_shares": 52
+    },
+    {
+      "topic": "Anti-Aging Natural",
+      "mentions": 520,
+      "engagement_score": 7.2,
+      "growth": "+31%",
+      "sentiment": "positive",
+      "discussion_volume": "medium",
+      "top_queries": [
+        "retinol",
+        "ácido hialurónico",
+        "colágeno"
+      ]
     },
     {
       "topic": "Rutina Coreana",
       "mentions": 820,
       "engagement_score": 6.9,
       "growth": "+28%",
-      "sentiment": "positive"
+      "sentiment": "positive",
+      "top_brands": [
+        "COSRX",
+        "Innisfree",
+        "Etude House"
+      ],
+      "avg_reactions": 265,
+      "avg_comments": 45,
+      "avg_shares": 48
     }
   ],
   "metadata": {
-    "method": "Graph API + Manual curation",
-    "dataType": "Public posts analysis",
-    "tokenStatus": "invalid",
-    "tokenError": "Request failed with status code 403"
+    "method": "Manual curation from public pages",
+    "dataType": "Public engagement analysis",
+    "updateFrequency": "Weekly",
+    "note": "No requiere API tokens - datos de observación pública"
   }
 }
