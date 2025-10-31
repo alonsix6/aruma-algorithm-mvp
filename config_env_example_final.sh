@@ -1,0 +1,13 @@
+# Meta Graph API Token
+# Obtén tu token en: https://developers.facebook.com/tools/explorer/
+META_ACCESS_TOKEN=EAAQb22vupf4BP68iP8TZATeZCB61SKfVlwtSEmUjjeRSeAtKhbwaXLgH8QIZCGhz9GlrdoYDX922YhCGelBm1hI8kOv8panOtngw1V5XMvYgEvnVR3q3sz8IomfnVgeGiwbJpIa19acoLRghZBeZARe9G1MagzscUPdQVMEqDogb8Q3VRzaeQ8ZAjRXZC06k7pNcJ2QjfYK9r5NW9EnyVPMBVEbRimZBR6lajXqtuOKNhhjGmA3jdyc6mIiqzvN9mBC9miN7dJ88l8ZBZBNnQGCU4Y9ZBl459KyzZC0W6ashHA6ZCqszwz5wZCdTvsqayz4cRJqiXC3qV0m1DgFgZDZD
+
+# TikTok Apify Token (opcional - solo si usas Apify)
+# Obtén tu token en: https://apify.com/
+APIFY_TOKEN=
+
+# Configuración Regional
+REGION=PE
+
+# Keywords de Beauty para Google Trends
+BEAUTY_KEYWORDS=skincare,cerave,niacinamide,retinol,maquillaje,protector solar
