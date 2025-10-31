@@ -169,26 +169,26 @@ export default function ExecutionLayer() {
               </div>
 
               {/* Métricas */}
-              <div className="grid grid-cols-5 gap-4 pt-4 border-t border-gray-200">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 pt-4 border-t border-gray-200">
                 <div>
                   <p className="text-xs text-gray-500">Impresiones</p>
-                  <p className="font-bold text-gray-900">{(camp.impressions / 1000).toFixed(0)}K</p>
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">{(camp.impressions / 1000).toFixed(0)}K</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Clicks</p>
-                  <p className="font-bold text-gray-900">{camp.clicks.toLocaleString()}</p>
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">{camp.clicks.toLocaleString()}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">CTR</p>
-                  <p className="font-bold text-blue-600">{camp.ctr}%</p>
+                  <p className="font-bold text-blue-600 text-sm sm:text-base">{camp.ctr}%</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">CPC</p>
-                  <p className="font-bold text-gray-900">$ {camp.cpc}</p>
+                  <p className="font-bold text-gray-900 text-sm sm:text-base">$ {camp.cpc}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Conversiones</p>
-                  <p className="font-bold text-green-600">{camp.conversions}</p>
+                  <p className="font-bold text-green-600 text-sm sm:text-base">{camp.conversions}</p>
                 </div>
               </div>
             </div>
@@ -239,26 +239,26 @@ export default function ExecutionLayer() {
           Performance en Tiempo Real
         </h3>
 
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Inversión Total Hoy 💰</p>
-            <p className="text-4xl font-bold">$ 12K</p>
+            <p className="text-3xl sm:text-4xl font-bold">$ 12K</p>
             <p className="text-green-200 text-sm mt-2">+12% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">USD</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Conversiones</p>
-            <p className="text-4xl font-bold">968</p>
+            <p className="text-3xl sm:text-4xl font-bold">968</p>
             <p className="text-green-200 text-sm mt-2">+18% vs ayer</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">ROAS Promedio</p>
-            <p className="text-4xl font-bold">2.7x</p>
+            <p className="text-3xl sm:text-4xl font-bold">2.7x</p>
             <p className="text-green-200 text-sm mt-2">+0.2 vs objetivo</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Revenue 💵</p>
-            <p className="text-4xl font-bold">S/ 113K</p>
+            <p className="text-3xl sm:text-4xl font-bold">S/ 113K</p>
             <p className="text-green-200 text-sm mt-2">+22% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">PEN</p>
           </div>

@@ -145,7 +145,7 @@ export default function DecisionLayer() {
                 </span>
               </div>
               
-              <div className="flex gap-6 mt-4">
+              <div className="flex flex-wrap gap-6 mt-4">
                 <div>
                   <p className="text-xs text-gray-500">Tamaño</p>
                   <p className="text-xl font-bold text-gray-900">{aud.size}</p>
