@@ -1,0 +1,147 @@
+{
+  "timestamp": "2025-01-30T15:30:00Z",
+  "source": "Google Analytics 4 (Mock)",
+  "property": "Aruma Peru - Ecommerce",
+  "dateRange": {
+    "start": "2024-12-01",
+    "end": "2025-01-30"
+  },
+  "overview": {
+    "totalUsers": 45280,
+    "activeUsers": 38450,
+    "newUsers": 12890,
+    "sessions": 67340,
+    "averageSessionDuration": "3m 42s",
+    "bounceRate": 0.42,
+    "conversions": 3240,
+    "conversionRate": 0.048
+  },
+  "topPages": [
+    {
+      "page": "/productos/skincare",
+      "views": 18500,
+      "uniquePageviews": 14200,
+      "avgTimeOnPage": "2m 15s",
+      "exitRate": 0.35,
+      "conversionRate": 0.068
+    },
+    {
+      "page": "/productos/cerave-serum",
+      "views": 12800,
+      "uniquePageviews": 9800,
+      "avgTimeOnPage": "3m 08s",
+      "exitRate": 0.28,
+      "conversionRate": 0.092
+    },
+    {
+      "page": "/productos/protector-solar",
+      "views": 15200,
+      "uniquePageviews": 11900,
+      "avgTimeOnPage": "2m 48s",
+      "exitRate": 0.31,
+      "conversionRate": 0.075
+    },
+    {
+      "page": "/productos/maquillaje",
+      "views": 10500,
+      "uniquePageviews": 8200,
+      "avgTimeOnPage": "2m 22s",
+      "exitRate": 0.38,
+      "conversionRate": 0.055
+    }
+  ],
+  "searchTerms": [
+    {
+      "term": "serum niacinamide",
+      "searches": 3450,
+      "resultClicks": 2890,
+      "conversionRate": 0.082,
+      "trend": "rising"
+    },
+    {
+      "term": "cerave hidratante",
+      "searches": 2980,
+      "resultClicks": 2450,
+      "conversionRate": 0.095,
+      "trend": "rising"
+    },
+    {
+      "term": "protector solar spf 50",
+      "searches": 4200,
+      "resultClicks": 3650,
+      "conversionRate": 0.078,
+      "trend": "stable"
+    },
+    {
+      "term": "rutina skincare",
+      "searches": 2150,
+      "resultClicks": 1680,
+      "conversionRate": 0.042,
+      "trend": "rising"
+    },
+    {
+      "term": "maquillaje vegano",
+      "searches": 1820,
+      "resultClicks": 1420,
+      "conversionRate": 0.058,
+      "trend": "rising"
+    }
+  ],
+  "demographics": {
+    "age": {
+      "18-24": 0.28,
+      "25-34": 0.42,
+      "35-44": 0.21,
+      "45-54": 0.07,
+      "55+": 0.02
+    },
+    "gender": {
+      "female": 0.76,
+      "male": 0.22,
+      "other": 0.02
+    },
+    "locations": {
+      "Lima": 0.58,
+      "Arequipa": 0.12,
+      "Trujillo": 0.09,
+      "Cusco": 0.07,
+      "Other": 0.14
+    }
+  },
+  "deviceCategory": {
+    "mobile": 0.68,
+    "desktop": 0.24,
+    "tablet": 0.08
+  },
+  "ecommerce": {
+    "transactions": 3240,
+    "revenue": 485600,
+    "averageOrderValue": 149.88,
+    "itemsPerTransaction": 2.3,
+    "topProducts": [
+      {
+        "name": "CeraVe Hydrating Cleanser",
+        "units": 820,
+        "revenue": 40180,
+        "avgPrice": 49
+      },
+      {
+        "name": "The Ordinary Niacinamide 10%",
+        "units": 650,
+        "revenue": 19500,
+        "avgPrice": 30
+      },
+      {
+        "name": "La Roche-Posay Protector Solar",
+        "units": 580,
+        "revenue": 39860,
+        "avgPrice": 68.72
+      }
+    ]
+  },
+  "metadata": {
+    "note": "Mock data for MVP demonstration",
+    "actualIntegration": "Requires Aruma GA4 property access",
+    "updateFrequency": "Daily automatic once integrated"
+  }
+}
