@@ -1,0 +1,61 @@
+# Configuración de Netlify para Aruma Algorithm MVP
+# Documentación: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Comando de build
+  command = "npm run build"
+  
+  # Directorio de publicación
+  publish = "dist"
+  
+  # Directorio base (raíz del proyecto)
+  base = "/"
+
+[build.environment]
+  # Versión de Node.js
+  NODE_VERSION = "18"
+  
+  # Versión de NPM
+  NPM_VERSION = "9"
+
+# Redirects para SPA (Single Page Application)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+
+# Headers para optimización
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    # Cache de 1 hora para archivos de data
+    Cache-Control = "public, max-age=3600"
+    
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    # Cache de 1 año para archivos JS con hash
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    # Cache de 1 año para archivos CSS con hash
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    # Cache de 1 año para fuentes
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Context-specific settings
+[context.production]
+  command = "npm run build"
+  
+[context.deploy-preview]
+  command = "npm run build"
+  
+[context.branch-deploy]
+  command = "npm run build"
