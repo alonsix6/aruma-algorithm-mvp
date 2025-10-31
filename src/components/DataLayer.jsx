@@ -10,11 +10,12 @@ export default function DataLayer() {
   const [lastRefresh, setLastRefresh] = useState(null);
 
   // Estado para controlar qué secciones están expandidas
+  // TODAS LAS SECCIONES EXPANDIDAS POR DEFECTO para presentación al cliente
   const [expandedSections, setExpandedSections] = useState({
-    trends: false,
-    tiktok: false,
-    meta: false,
-    ga4: false
+    trends: true,
+    tiktok: true,
+    meta: true,
+    ga4: true
   });
 
   useEffect(() => {
