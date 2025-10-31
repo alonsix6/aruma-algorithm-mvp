@@ -1,0 +1,105 @@
+{
+  "timestamp": "2025-10-31T07:05:01.276Z",
+  "source": "TikTok Creative Center",
+  "region": "PE",
+  "category": "Beauty & Personal Care",
+  "trends": {
+    "hashtags": [
+      {
+        "hashtag": "#skincare",
+        "views": "2.8M",
+        "posts": "18.5K",
+        "growth": "+52%",
+        "relevanceScore": 95,
+        "region": "LATAM"
+      },
+      {
+        "hashtag": "#beautyhacks",
+        "views": "2.1M",
+        "posts": "14.2K",
+        "growth": "+38%",
+        "relevanceScore": 88,
+        "region": "Global"
+      },
+      {
+        "hashtag": "#makeuptutorial",
+        "views": "3.5M",
+        "posts": "22.1K",
+        "growth": "+45%",
+        "relevanceScore": 92,
+        "region": "Global"
+      },
+      {
+        "hashtag": "#glowyskin",
+        "views": "1.4M",
+        "posts": "9.8K",
+        "growth": "+67%",
+        "relevanceScore": 85,
+        "region": "LATAM"
+      },
+      {
+        "hashtag": "#cerave",
+        "views": "950K",
+        "posts": "6.2K",
+        "growth": "+89%",
+        "relevanceScore": 91,
+        "region": "Peru"
+      },
+      {
+        "hashtag": "#serumfacial",
+        "views": "780K",
+        "posts": "4.8K",
+        "growth": "+72%",
+        "relevanceScore": 82,
+        "region": "Peru"
+      },
+      {
+        "hashtag": "#rutinadecuidado",
+        "views": "1.2M",
+        "posts": "8.5K",
+        "growth": "+58%",
+        "relevanceScore": 87,
+        "region": "LATAM"
+      },
+      {
+        "hashtag": "#protectorsolar",
+        "views": "890K",
+        "posts": "5.6K",
+        "growth": "+93%",
+        "relevanceScore": 94,
+        "region": "Peru"
+      }
+    ],
+    "sounds": [
+      {
+        "soundName": "Glow Up Routine",
+        "usage": "15.2K",
+        "growth": "+125%",
+        "category": "Skincare"
+      },
+      {
+        "soundName": "Beauty Must Haves",
+        "usage": "12.8K",
+        "growth": "+87%",
+        "category": "Product Reviews"
+      }
+    ],
+    "creators": [
+      {
+        "category": "Skincare Educators",
+        "avgEngagement": "8.5%",
+        "topRegion": "Peru"
+      },
+      {
+        "category": "Makeup Artists",
+        "avgEngagement": "6.2%",
+        "topRegion": "LATAM"
+      }
+    ]
+  },
+  "metadata": {
+    "method": "Manual curation + Public data",
+    "updateFrequency": "hourly",
+    "note": "Data basada en observación del TikTok Creative Center público"
+  }
+}
