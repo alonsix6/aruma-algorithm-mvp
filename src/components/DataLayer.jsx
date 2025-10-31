@@ -149,7 +149,7 @@ export default function DataLayer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
             <p className="text-white/70 text-xs mb-1">Búsqueda</p>
             <p className="text-xl font-bold">{scores.search}</p>
@@ -195,10 +195,10 @@ export default function DataLayer() {
                 <Info className="w-4 h-4" />
                 Metadata del Scraping
               </h4>
-              <div className="grid grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <p className="text-pink-700 font-medium">Última actualización</p>
-                  <p className="text-pink-900">{formatDate(trendsData.timestamp)}</p>
+                  <p className="text-pink-900 text-xs sm:text-sm break-words">{formatDate(trendsData.timestamp)}</p>
                 </div>
                 <div>
                   <p className="text-pink-700 font-medium">Método</p>
@@ -275,7 +275,7 @@ export default function DataLayer() {
             {/* Regiones detalladas */}
             <div>
               <h4 className="font-semibold text-gray-900 mb-3">🗺️ Distribución por Regiones (Top Keywords)</h4>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {trendsData.keywords?.slice(0, 4).map((kw, idx) => (
                   <div key={idx} className="bg-gray-50 rounded-lg p-4">
                     <p className="font-semibold text-gray-900 mb-2">{kw.keyword}</p>
@@ -329,10 +329,10 @@ export default function DataLayer() {
                 <Info className="w-4 h-4" />
                 Metadata del Scraping
               </h4>
-              <div className="grid grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <p className="text-purple-700 font-medium">Última actualización</p>
-                  <p className="text-purple-900">{formatDate(tiktokData.timestamp)}</p>
+                  <p className="text-purple-900 text-xs sm:text-sm break-words">{formatDate(tiktokData.timestamp)}</p>
                 </div>
                 <div>
                   <p className="text-purple-700 font-medium">Método</p>
@@ -402,7 +402,7 @@ export default function DataLayer() {
             {tiktokData.trends?.sounds && (
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3">🎶 Sounds Trending</h4>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {tiktokData.trends.sounds.map((sound, idx) => (
                     <div key={idx} className="bg-purple-50 rounded-lg p-4">
                       <p className="font-semibold text-purple-900">{sound.soundName}</p>
@@ -446,10 +446,10 @@ export default function DataLayer() {
                 <Info className="w-4 h-4" />
                 Metadata del Scraping
               </h4>
-              <div className="grid grid-cols-3 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                 <div>
                   <p className="text-rose-700 font-medium">Última actualización</p>
-                  <p className="text-rose-900">{formatDate(metaData.timestamp)}</p>
+                  <p className="text-rose-900 text-xs sm:text-sm break-words">{formatDate(metaData.timestamp)}</p>
                 </div>
                 <div>
                   <p className="text-rose-700 font-medium">Método</p>
@@ -466,28 +466,28 @@ export default function DataLayer() {
             {metaData.pages?.[0]?.metadata && (
               <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
                 <h4 className="font-semibold text-rose-900 mb-3">📍 Fuentes Monitoreadas</h4>
-                <div className="grid grid-cols-3 gap-4 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Páginas FB:</p>
-                    <ul className="text-rose-800 space-y-1">
+                    <ul className="text-rose-800 space-y-1 text-xs">
                       {metaData.pages[0].metadata.pages_monitored?.slice(0, 3).map((page, idx) => (
-                        <li key={idx}>• {page}</li>
+                        <li key={idx} className="break-words">• {page}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Grupos FB:</p>
-                    <ul className="text-rose-800 space-y-1">
+                    <ul className="text-rose-800 space-y-1 text-xs">
                       {metaData.pages[0].metadata.groups_monitored?.map((group, idx) => (
-                        <li key={idx}>• {group}</li>
+                        <li key={idx} className="break-words">• {group}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Hashtags IG:</p>
-                    <ul className="text-rose-800 space-y-1">
+                    <ul className="text-rose-800 space-y-1 text-xs">
                       {metaData.pages[0].metadata.instagram_hashtags?.slice(0, 3).map((tag, idx) => (
-                        <li key={idx}>• {tag}</li>
+                        <li key={idx} className="break-words">• {tag}</li>
                       ))}
                     </ul>
                   </div>
@@ -564,7 +564,7 @@ export default function DataLayer() {
             {/* Métricas de engagement detalladas */}
             <div>
               <h4 className="font-semibold text-gray-900 mb-3">📊 Métricas de Engagement Detalladas</h4>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {metaData.aggregatedTopics?.slice(0, 6).map((topic, idx) => (
                   <div key={idx} className="bg-rose-50 rounded-lg p-4">
                     <p className="font-semibold text-rose-900 text-sm mb-3">{topic.topic}</p>
@@ -625,7 +625,7 @@ export default function DataLayer() {
             </div>
 
             {/* Overview */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-blue-50 rounded-lg p-4">
                 <p className="text-xs text-blue-700 mb-1">Total Users</p>
                 <p className="text-2xl font-bold text-blue-900">{ga4Data.overview?.totalUsers?.toLocaleString()}</p>
@@ -702,7 +702,7 @@ export default function DataLayer() {
             {ga4Data.ecommerce?.topProducts && (
               <div>
                 <h4 className="font-semibold text-gray-900 mb-3">🛍️ Top Productos por Revenue</h4>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {ga4Data.ecommerce.topProducts.map((product, idx) => (
                     <div key={idx} className="bg-blue-50 rounded-lg p-4">
                       <p className="font-semibold text-blue-900 mb-2">{product.name}</p>

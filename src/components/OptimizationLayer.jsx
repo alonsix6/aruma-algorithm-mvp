@@ -111,11 +111,11 @@ export default function OptimizationLayer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <div className="p-6 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl border-2 border-blue-200">
             <p className="text-sm text-gray-600 mb-2">Signal Score Actual</p>
             <div className="flex items-end gap-4">
-              <p className="text-5xl font-bold text-blue-600">{signalScore.current}</p>
+              <p className="text-4xl sm:text-5xl font-bold text-blue-600">{signalScore.current}</p>
               <div className="pb-2">
                 <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-bold">
                   +{(signalScore.current - signalScore.previous).toFixed(1)} ↑
@@ -186,18 +186,18 @@ export default function OptimizationLayer() {
             Se expresa como multiplicador (ej: 2.7x significa que por cada $1 invertido, obtienes $2.7 de retorno)
           </p>
 
-          <div className="grid grid-cols-3 gap-4 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-white/70 text-xs mb-1">Inversión</p>
-              <p className="text-2xl font-bold">$ {exampleInvestmentUSD.toLocaleString()}</p>
+              <p className="text-xl sm:text-2xl font-bold">$ {exampleInvestmentUSD.toLocaleString()}</p>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-white/70 text-xs mb-1">Revenue</p>
-              <p className="text-2xl font-bold">S/ {exampleRevenuePEN.toLocaleString()}</p>
+              <p className="text-xl sm:text-2xl font-bold">S/ {exampleRevenuePEN.toLocaleString()}</p>
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-white/70 text-xs mb-1">ROI</p>
-              <p className="text-2xl font-bold text-green-300">{calculatedROI.toFixed(1)}x</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-300">{calculatedROI.toFixed(1)}x</p>
             </div>
           </div>
 
@@ -299,20 +299,20 @@ export default function OptimizationLayer() {
           Impacto de la Optimización
         </h3>
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <p className="text-white/80 text-sm mb-2">Mejora en ROAS</p>
-            <p className="text-4xl font-bold">+32%</p>
+            <p className="text-3xl sm:text-4xl font-bold">+32%</p>
             <p className="text-green-200 text-sm mt-2">vs período inicial</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <p className="text-white/80 text-sm mb-2">Ahorro en CPA</p>
-            <p className="text-4xl font-bold">-18%</p>
+            <p className="text-3xl sm:text-4xl font-bold">-18%</p>
             <p className="text-green-200 text-sm mt-2">$ 2.8K ahorrados</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <p className="text-white/80 text-sm mb-2">Conversiones Extra</p>
-            <p className="text-4xl font-bold">+245</p>
+            <p className="text-3xl sm:text-4xl font-bold">+245</p>
             <p className="text-green-200 text-sm mt-2">por optimización</p>
           </div>
         </div>
