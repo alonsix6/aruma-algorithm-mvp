@@ -1,6 +1,9 @@
 import { TrendingUp, BarChart3, RefreshCw, Award } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
+// Tasa de conversión PEN a USD para cálculos de ROI
+const PEN_TO_USD = 3.5;
+
 export default function OptimizationLayer() {
   const performanceData = [
     { day: 'Lun', roas: 2.8, conversions: 45, spent: 850 },
@@ -12,11 +15,25 @@ export default function OptimizationLayer() {
     { day: 'Dom', roas: 3.2, conversions: 58, spent: 1020 }
   ];
 
+  // Cálculo de ROI real con conversión PEN a USD
+  // ROI = ((Revenue en PEN / PEN_TO_USD) - Investment en USD) / Investment en USD * 100
+  const calculateROI = (revenuePEN, investmentUSD) => {
+    const revenueUSD = revenuePEN / PEN_TO_USD;
+    const roi = ((revenueUSD - investmentUSD) / investmentUSD) * 100;
+    return roi;
+  };
+
+  // Ejemplo: Revenue S/ 39,800 / Investment $ 11,700
+  const exampleRevenuePEN = 39800;
+  const exampleInvestmentUSD = 11700;
+  const calculatedROI = calculateROI(exampleRevenuePEN, exampleInvestmentUSD);
+  const roiScore = Math.min(10, (calculatedROI / 10)).toFixed(1); // Normalizado a escala 0-10
+
   const signalScore = {
     current: 8.7,
     previous: 8.2,
     components: [
-      { name: 'ROI', score: 9.2, weight: 0.35, trend: 'up' },
+      { name: 'ROI', score: parseFloat(roiScore), weight: 0.35, trend: 'up' },
       { name: 'CTR', score: 8.5, weight: 0.25, trend: 'up' },
       { name: 'Engagement Rate', score: 8.8, weight: 0.25, trend: 'stable' },
       { name: 'Tiempo Activo', score: 8.3, weight: 0.15, trend: 'up' }
@@ -153,6 +170,52 @@ export default function OptimizationLayer() {
         </div>
       </div>
 
+      {/* ROI Calculation Explanation */}
+      <div className="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl shadow-lg p-6">
+        <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+          <Award className="w-6 h-6" />
+          Cálculo de ROI - Inversión en USD, Revenue en PEN
+        </h3>
+
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 mb-4">
+          <p className="text-white/90 text-sm mb-3">
+            📊 <strong>Fórmula:</strong> ROI = ((Revenue en S/ ÷ {PEN_TO_USD}) - Inversión en $) ÷ Inversión en $ × 100
+          </p>
+
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            <div className="bg-white/10 rounded-lg p-3">
+              <p className="text-white/70 text-xs mb-1">Inversión</p>
+              <p className="text-2xl font-bold">$ {exampleInvestmentUSD.toLocaleString()}</p>
+            </div>
+            <div className="bg-white/10 rounded-lg p-3">
+              <p className="text-white/70 text-xs mb-1">Revenue</p>
+              <p className="text-2xl font-bold">S/ {exampleRevenuePEN.toLocaleString()}</p>
+            </div>
+            <div className="bg-white/10 rounded-lg p-3">
+              <p className="text-white/70 text-xs mb-1">ROI</p>
+              <p className="text-2xl font-bold text-green-300">{calculatedROI.toFixed(1)}%</p>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-white/20">
+            <p className="text-white/80 text-xs">
+              💱 Tasa de conversión: S/ {PEN_TO_USD} = $ 1.00 USD
+            </p>
+            <p className="text-white/80 text-xs mt-1">
+              💰 Revenue en USD: $ {(exampleRevenuePEN / PEN_TO_USD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            </p>
+            <p className="text-white/80 text-xs mt-1">
+              ✅ Ganancia neta: $ {((exampleRevenuePEN / PEN_TO_USD) - exampleInvestmentUSD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            </p>
+          </div>
+        </div>
+
+        <p className="text-white/80 text-sm">
+          Este cálculo asegura que comparamos manzanas con manzanas: convertimos los ingresos en soles a dólares
+          antes de calcular el ROI, permitiendo una evaluación precisa del retorno de inversión.
+        </p>
+      </div>
+
       {/* Budget Reallocation */}
       <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
         <div className="flex items-center gap-3 mb-6">
@@ -178,7 +241,7 @@ export default function OptimizationLayer() {
                   <p className="text-xs text-gray-600">{move.reason}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-purple-600">S/ {move.amount}</p>
+                  <p className="text-2xl font-bold text-purple-600">$ {move.amount}</p>
                   <p className="text-xs text-gray-500">redistribuido</p>
                 </div>
               </div>
@@ -241,7 +304,7 @@ export default function OptimizationLayer() {
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <p className="text-white/80 text-sm mb-2">Ahorro en CPA</p>
             <p className="text-4xl font-bold">-18%</p>
-            <p className="text-green-200 text-sm mt-2">S/ 2.8K ahorrados</p>
+            <p className="text-green-200 text-sm mt-2">$ 2.8K ahorrados</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
             <p className="text-white/80 text-sm mb-2">Conversiones Extra</p>

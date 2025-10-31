@@ -89,13 +89,23 @@ export default function ExecutionLayer() {
 
       {/* Campañas Activas */}
       <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-            <PlayCircle className="w-6 h-6 text-white" />
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+              <PlayCircle className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-gray-900">Campañas en Ejecución</h3>
+              <p className="text-sm text-gray-600">{campaigns.length} campañas activas multi-plataforma</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">Campañas en Ejecución</h3>
-            <p className="text-sm text-gray-600">{campaigns.length} campañas activas multi-plataforma</p>
+          <div className="flex gap-2">
+            <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
+              💰 Inversión: USD
+            </span>
+            <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-medium">
+              💵 Revenue: PEN
+            </span>
           </div>
         </div>
 
@@ -124,7 +134,7 @@ export default function ExecutionLayer() {
                 <div className="flex justify-between text-xs text-gray-600 mb-1">
                   <span>Presupuesto gastado</span>
                   <span className="font-semibold">
-                    S/ {camp.spent.toLocaleString()} / S/ {camp.budget.toLocaleString()}
+                    $ {camp.spent.toLocaleString()} / $ {camp.budget.toLocaleString()}
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-3">
@@ -151,7 +161,7 @@ export default function ExecutionLayer() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">CPC</p>
-                  <p className="font-bold text-gray-900">S/ {camp.cpc}</p>
+                  <p className="font-bold text-gray-900">$ {camp.cpc}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500">Conversiones</p>
@@ -208,9 +218,10 @@ export default function ExecutionLayer() {
 
         <div className="grid grid-cols-4 gap-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
-            <p className="text-white/80 text-sm mb-1">Inversión Total Hoy</p>
-            <p className="text-4xl font-bold">S/ 11.7K</p>
+            <p className="text-white/80 text-sm mb-1">Inversión Total Hoy 💰</p>
+            <p className="text-4xl font-bold">$ 11.7K</p>
             <p className="text-green-200 text-sm mt-2">+18% vs ayer</p>
+            <p className="text-white/60 text-xs mt-1">USD</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Conversiones</p>
@@ -223,9 +234,10 @@ export default function ExecutionLayer() {
             <p className="text-green-200 text-sm mt-2">+0.3 vs objetivo</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
-            <p className="text-white/80 text-sm mb-1">Revenue</p>
+            <p className="text-white/80 text-sm mb-1">Revenue 💵</p>
             <p className="text-4xl font-bold">S/ 39.8K</p>
             <p className="text-green-200 text-sm mt-2">+25% vs ayer</p>
+            <p className="text-white/60 text-xs mt-1">PEN</p>
           </div>
         </div>
       </div>
