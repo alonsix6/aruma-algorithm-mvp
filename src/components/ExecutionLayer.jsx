@@ -40,6 +40,19 @@ export default function ExecutionLayer() {
       roas: 3.2,
       ctr: 4.5,
       cpc: 1.02
+    },
+    {
+      name: 'Display Banner - Genérico',
+      status: 'paused',
+      platform: 'Display Network',
+      budget: 950,
+      spent: 890,
+      impressions: 152000,
+      clicks: 456,
+      conversions: 8,
+      roas: 0.1,
+      ctr: 0.3,
+      cpc: 1.95
     }
   ];
 
@@ -111,21 +124,31 @@ export default function ExecutionLayer() {
 
         <div className="space-y-4">
           {campaigns.map((camp, idx) => (
-            <div key={idx} className="border-2 border-gray-200 rounded-xl p-5 hover:border-green-300 transition">
+            <div key={idx} className={`border-2 rounded-xl p-5 transition ${
+              camp.status === 'paused'
+                ? 'border-red-300 bg-red-50 hover:border-red-400'
+                : 'border-gray-200 hover:border-green-300'
+            }`}>
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <h4 className="font-bold text-gray-900 text-lg">{camp.name}</h4>
-                    <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">
+                    <span className={`px-2 py-1 rounded-full text-xs font-bold ${
+                      camp.status === 'paused'
+                        ? 'bg-red-200 text-red-800'
+                        : 'bg-green-100 text-green-700'
+                    }`}>
                       {camp.status.toUpperCase()}
                     </span>
                   </div>
                   <p className="text-sm text-gray-500">{camp.platform}</p>
                 </div>
-                
+
                 <div className="text-right">
                   <p className="text-xs text-gray-500">ROAS</p>
-                  <p className="text-3xl font-bold text-green-600">{camp.roas}x</p>
+                  <p className={`text-3xl font-bold ${
+                    camp.roas < 1 ? 'text-red-600' : 'text-green-600'
+                  }`}>{camp.roas}x</p>
                 </div>
               </div>
 
@@ -219,24 +242,24 @@ export default function ExecutionLayer() {
         <div className="grid grid-cols-4 gap-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Inversión Total Hoy 💰</p>
-            <p className="text-4xl font-bold">$ 15.8K</p>
-            <p className="text-green-200 text-sm mt-2">+18% vs ayer</p>
+            <p className="text-4xl font-bold">$ 12K</p>
+            <p className="text-green-200 text-sm mt-2">+12% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">USD</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Conversiones</p>
-            <p className="text-4xl font-bold">856</p>
-            <p className="text-green-200 text-sm mt-2">+23% vs ayer</p>
+            <p className="text-4xl font-bold">968</p>
+            <p className="text-green-200 text-sm mt-2">+18% vs ayer</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">ROAS Promedio</p>
-            <p className="text-4xl font-bold">3.4x</p>
-            <p className="text-green-200 text-sm mt-2">+0.3 vs objetivo</p>
+            <p className="text-4xl font-bold">2.7x</p>
+            <p className="text-green-200 text-sm mt-2">+0.2 vs objetivo</p>
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Revenue 💵</p>
-            <p className="text-4xl font-bold">S/ 95K</p>
-            <p className="text-green-200 text-sm mt-2">+28% vs ayer</p>
+            <p className="text-4xl font-bold">S/ 113K</p>
+            <p className="text-green-200 text-sm mt-2">+22% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">PEN</p>
           </div>
         </div>
