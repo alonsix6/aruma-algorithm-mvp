@@ -1,0 +1,144 @@
+{
+  "timestamp": "2025-01-30T15:30:00Z",
+  "source": "Google Ads (Mock)",
+  "account": "Aruma Peru",
+  "dateRange": {
+    "start": "2025-01-01",
+    "end": "2025-01-30"
+  },
+  "performance": {
+    "impressions": 285000,
+    "clicks": 14250,
+    "ctr": 0.05,
+    "cost": 12800,
+    "conversions": 856,
+    "conversionRate": 0.06,
+    "costPerConversion": 14.95,
+    "roas": 3.2
+  },
+  "campaigns": [
+    {
+      "name": "Beauty - Skincare Search",
+      "status": "active",
+      "impressions": 95000,
+      "clicks": 5700,
+      "ctr": 0.06,
+      "cost": 5200,
+      "conversions": 380,
+      "conversionRate": 0.067,
+      "cpc": 0.91,
+      "roas": 3.8,
+      "topKeywords": [
+        {
+          "keyword": "cerave serum",
+          "impressions": 12500,
+          "clicks": 825,
+          "ctr": 0.066,
+          "cost": 742,
+          "conversions": 58,
+          "qualityScore": 8
+        },
+        {
+          "keyword": "protector solar facial",
+          "impressions": 18200,
+          "clicks": 1150,
+          "ctr": 0.063,
+          "cost": 1035,
+          "conversions": 78,
+          "qualityScore": 9
+        },
+        {
+          "keyword": "serum niacinamide",
+          "impressions": 9800,
+          "clicks": 680,
+          "ctr": 0.069,
+          "cost": 612,
+          "conversions": 52,
+          "qualityScore": 8
+        }
+      ]
+    },
+    {
+      "name": "Beauty - Display Network",
+      "status": "active",
+      "impressions": 125000,
+      "clicks": 5000,
+      "ctr": 0.04,
+      "cost": 3800,
+      "conversions": 280,
+      "conversionRate": 0.056,
+      "cpc": 0.76,
+      "roas": 2.9
+    },
+    {
+      "name": "Beauty - PMax Skincare",
+      "status": "active",
+      "impressions": 65000,
+      "clicks": 3550,
+      "ctr": 0.055,
+      "cost": 3800,
+      "conversions": 196,
+      "conversionRate": 0.055,
+      "cpc": 1.07,
+      "roas": 3.4
+    }
+  ],
+  "audienceInsights": {
+    "demographics": {
+      "18-24": {
+        "impressions": 79800,
+        "conversions": 240,
+        "conversionRate": 0.058
+      },
+      "25-34": {
+        "impressions": 125400,
+        "conversions": 420,
+        "conversionRate": 0.068
+      },
+      "35-44": {
+        "impressions": 65550,
+        "conversions": 152,
+        "conversionRate": 0.052
+      }
+    },
+    "devices": {
+      "mobile": {
+        "impressions": 193800,
+        "conversions": 582,
+        "conversionRate": 0.062
+      },
+      "desktop": {
+        "impressions": 68400,
+        "conversions": 205,
+        "conversionRate": 0.055
+      },
+      "tablet": {
+        "impressions": 22800,
+        "conversions": 69,
+        "conversionRate": 0.048
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "type": "keyword_expansion",
+      "priority": "high",
+      "suggestion": "Add 'serum vitamina c' and 'limpiador cerave' - high search volume, low competition"
+    },
+    {
+      "type": "budget_allocation",
+      "priority": "medium",
+      "suggestion": "Increase budget on 'Skincare Search' campaign (+20%) based on ROAS performance"
+    },
+    {
+      "type": "audience_optimization",
+      "priority": "high",
+      "suggestion": "Focus on 25-34 female demographic - highest conversion rate (6.8%)"
+    }
+  ],
+  "metadata": {
+    "note": "Mock data for MVP demonstration",
+    "actualIntegration": "Requires Aruma Google Ads API access",
+    "updateFrequency": "Daily automatic once integrated"
+  }
+}
