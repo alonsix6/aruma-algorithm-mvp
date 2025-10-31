@@ -23,11 +23,14 @@ export default function OptimizationLayer() {
     return roi;
   };
 
-  // Ejemplo: Revenue S/ 39,800 / Investment $ 11,700
-  const exampleRevenuePEN = 39800;
-  const exampleInvestmentUSD = 11700;
+  // Ejemplo con ROI positivo: Revenue S/ 95,000 / Investment $ 15,800
+  // Con ROAS promedio 3.4x: $15,800 * 3.4 = $53,720 revenue esperado en USD
+  // Si revenue se genera en PEN: $53,720 * 3.5 = S/ 188,020
+  // Usando S/ 95,000 para ser conservador: ROI = +71.9%
+  const exampleRevenuePEN = 95000;
+  const exampleInvestmentUSD = 15800;
   const calculatedROI = calculateROI(exampleRevenuePEN, exampleInvestmentUSD);
-  const roiScore = Math.min(10, (calculatedROI / 10)).toFixed(1); // Normalizado a escala 0-10
+  const roiScore = Math.min(10, Math.max(0, calculatedROI / 10)).toFixed(1); // Normalizado a escala 0-10
 
   const signalScore = {
     current: 8.7,

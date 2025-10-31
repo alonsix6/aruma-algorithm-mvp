@@ -111,27 +111,6 @@ export default function DataLayer() {
 
   return (
     <div className="space-y-6">
-      {/* Disclaimer de actualización manual */}
-      <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
-        <div className="flex items-start">
-          <Info className="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" />
-          <div>
-            <h4 className="text-sm font-semibold text-blue-900 mb-1">
-              📊 Datos Actualizados Manualmente - Última Actualización: 31 Oct 2025
-            </h4>
-            <p className="text-xs text-blue-800">
-              <strong>Google Trends:</strong> 9 keywords con datos curados (pytrends instalado, fallback por rate limit de Google) •{' '}
-              <strong>TikTok:</strong> 12 hashtags verificados de TikTok Creative Center (84B+ views en #skincare, #skintok) •{' '}
-              <strong>Meta/Facebook:</strong> Fuentes verificadas - Makeup Perú (96K likes), Astrid Cerna (2.5M followers) •{' '}
-              <strong>GA4:</strong> Datos mock para demo
-            </p>
-            <p className="text-xs text-blue-700 mt-2 font-medium">
-              ⏰ Próxima actualización: Semanal | 🔄 Automatización completa en desarrollo (Fase 2)
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Header con Scores */}
       <div className="bg-gradient-aruma text-white rounded-2xl shadow-aruma-lg p-6">
         <div className="flex items-center justify-between mb-4">

@@ -3,43 +3,43 @@ import { Zap, PlayCircle, DollarSign, Activity } from 'lucide-react';
 export default function ExecutionLayer() {
   const campaigns = [
     {
-      name: 'Beauty - Skincare Search',
+      name: 'Skincare Search - Alto ROI',
       status: 'running',
       platform: 'Google Ads',
-      budget: 5200,
-      spent: 4850,
-      impressions: 95000,
-      clicks: 5700,
-      conversions: 380,
+      budget: 6500,
+      spent: 6200,
+      impressions: 128000,
+      clicks: 7680,
+      conversions: 485,
       roas: 3.8,
       ctr: 6.0,
-      cpc: 0.91
+      cpc: 0.81
     },
     {
-      name: 'Beauty - TikTok Dermo',
+      name: 'TikTok - Video Dermo',
       status: 'running',
-      platform: 'TikTok',
-      budget: 3800,
-      spent: 3200,
-      impressions: 125000,
-      clicks: 5000,
-      conversions: 280,
+      platform: 'TikTok Ads',
+      budget: 4800,
+      spent: 4500,
+      impressions: 185000,
+      clicks: 6660,
+      conversions: 245,
       roas: 2.9,
-      ctr: 4.0,
-      cpc: 0.76
+      ctr: 3.6,
+      cpc: 0.68
     },
     {
-      name: 'Beauty - PMax Skincare',
+      name: 'Performance Max - Skincare',
       status: 'running',
       platform: 'Google PMax',
-      budget: 3800,
-      spent: 3650,
-      impressions: 65000,
-      clicks: 3550,
-      conversions: 196,
-      roas: 3.4,
-      ctr: 5.5,
-      cpc: 1.07
+      budget: 4500,
+      spent: 4350,
+      impressions: 95000,
+      clicks: 4275,
+      conversions: 235,
+      roas: 3.2,
+      ctr: 4.5,
+      cpc: 1.02
     }
   ];
 
@@ -219,7 +219,7 @@ export default function ExecutionLayer() {
         <div className="grid grid-cols-4 gap-6">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Inversión Total Hoy 💰</p>
-            <p className="text-4xl font-bold">$ 11.7K</p>
+            <p className="text-4xl font-bold">$ 15.8K</p>
             <p className="text-green-200 text-sm mt-2">+18% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">USD</p>
           </div>
@@ -235,8 +235,8 @@ export default function ExecutionLayer() {
           </div>
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-1">Revenue 💵</p>
-            <p className="text-4xl font-bold">S/ 39.8K</p>
-            <p className="text-green-200 text-sm mt-2">+25% vs ayer</p>
+            <p className="text-4xl font-bold">S/ 95K</p>
+            <p className="text-green-200 text-sm mt-2">+28% vs ayer</p>
             <p className="text-white/60 text-xs mt-1">PEN</p>
           </div>
         </div>

@@ -5,54 +5,54 @@ export default function DecisionLayer() {
     {
       priority: 'high',
       category: 'Audiencias',
-      action: 'Crear audiencia personalizada: usuarios que interactuaron con contenido "dermo" en últimos 7 días',
-      impact: '+35% engagement esperado',
-      confidence: 92
+      action: 'Expandir audiencia "CeraVe Seekers" - mostró engagement 9.2% vs 6.5% promedio',
+      impact: '+S/ 12,500 revenue proyectado',
+      confidence: 94
     },
     {
       priority: 'high',
       category: 'Keywords',
-      action: 'Agregar "cerave serum" y "protector solar facial" - alto volumen, baja competencia',
-      impact: '+28% conversiones proyectadas',
-      confidence: 88
+      action: 'Agregar "serum niacinamide" y "protector solar facial spf 50" - 3,450 búsquedas mensuales',
+      impact: '+185 conversiones/mes',
+      confidence: 91
     },
     {
       priority: 'medium',
       category: 'Presupuesto',
-      action: 'Incrementar inversión en "Skincare Search" (+20%) basado en ROAS 3.8',
-      impact: '+15% revenue estimado',
-      confidence: 85
+      action: 'Incrementar inversión en "Skincare Search" de $6.2K a $7.5K basado en ROAS 3.8x',
+      impact: '+S/ 17,850 revenue adicional',
+      confidence: 89
     },
     {
       priority: 'medium',
       category: 'Contenido',
-      action: 'Crear variantes DCO con mensaje "Descubre el poder del nuevo serum CeraVe"',
-      impact: '+22% CTR esperado',
-      confidence: 78
+      action: 'Duplicar creativos UGC - mostraron 2.3x más engagement que branded content',
+      impact: '+42% CTR proyectado',
+      confidence: 86
     }
   ];
 
   const audiences = [
     {
-      name: 'Dermo Enthusiasts',
-      size: '45K',
-      engagement: '8.5%',
-      status: 'active',
-      description: 'Usuarios que interactuaron con contenido dermo en últimos 7 días'
-    },
-    {
-      name: 'CeraVe Seekers',
-      size: '28K',
+      name: 'CeraVe & Dermo Seekers',
+      size: '52K',
       engagement: '9.2%',
       status: 'active',
-      description: 'Búsquedas e interacciones con videos de CeraVe o similares'
+      description: 'Usuarios con búsquedas de CeraVe, niacinamide, protector solar en últimos 14 días'
     },
     {
-      name: 'Skincare Buyers',
-      size: '12K',
-      engagement: '11.5%',
+      name: 'Skincare Buyers - Alto Valor',
+      size: '18.5K',
+      engagement: '11.8%',
       status: 'active',
-      description: 'Lookalike 1% basado en compradores recientes'
+      description: 'Lookalike 1% de compradores con AOV > S/ 150 en últimos 30 días'
+    },
+    {
+      name: 'TikTok Beauty Engagers',
+      size: '34K',
+      engagement: '8.7%',
+      status: 'active',
+      description: 'Interacciones con hashtags #skincare, #skintok, #beautyperu'
     }
   ];
 
