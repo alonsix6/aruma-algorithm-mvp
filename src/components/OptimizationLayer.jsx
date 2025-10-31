@@ -29,16 +29,15 @@ export default function OptimizationLayer() {
   const exampleRevenuePEN = 113400;
   const exampleInvestmentUSD = 12000;
   const calculatedROI = calculateROI(exampleRevenuePEN, exampleInvestmentUSD);
-  const roiScore = Math.min(10, calculatedROI * 2.5).toFixed(1); // Normalizado: 2.7 * 2.5 = 6.75 ≈ 6.8
 
   const signalScore = {
     current: 7.2,
     previous: 6.8,
     components: [
-      { name: 'ROI', score: parseFloat(roiScore), weight: 0.35, trend: 'up' },
-      { name: 'CTR', score: 7.1, weight: 0.25, trend: 'up' },
-      { name: 'Engagement Rate', score: 7.5, weight: 0.25, trend: 'stable' },
-      { name: 'Tiempo Activo', score: 6.9, weight: 0.15, trend: 'up' }
+      { name: 'ROI', score: parseFloat(calculatedROI.toFixed(1)), weight: 0.35, trend: 'up', format: 'x' },
+      { name: 'CTR', score: 7.1, weight: 0.25, trend: 'up', format: '%' },
+      { name: 'Engagement Rate', score: 7.5, weight: 0.25, trend: 'stable', format: '%' },
+      { name: 'Tiempo Activo', score: 6.9, weight: 0.15, trend: 'up', format: '/10' }
     ]
   };
 
@@ -136,7 +135,7 @@ export default function OptimizationLayer() {
                     <span className="text-xs text-gray-500">({(comp.weight * 100).toFixed(0)}%)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-gray-900">{comp.score}</span>
+                    <span className="font-bold text-gray-900">{comp.score}{comp.format || ''}</span>
                     <span className={`text-xs ${
                       comp.trend === 'up' ? 'text-green-600' : 'text-gray-400'
                     }`}>
@@ -181,7 +180,10 @@ export default function OptimizationLayer() {
 
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 mb-4">
           <p className="text-white/90 text-sm mb-3">
-            📊 <strong>Fórmula:</strong> ROI = ((Revenue en S/ ÷ {PEN_TO_USD}) - Inversión en $) ÷ Inversión en $ × 100
+            📊 <strong>Fórmula:</strong> ROI = (Revenue en S/ ÷ {PEN_TO_USD}) ÷ Inversión en $
+          </p>
+          <p className="text-white/80 text-xs mb-3">
+            Se expresa como multiplicador (ej: 2.7x significa que por cada $1 invertido, obtienes $2.7 de retorno)
           </p>
 
           <div className="grid grid-cols-3 gap-4 mt-4">
@@ -195,7 +197,7 @@ export default function OptimizationLayer() {
             </div>
             <div className="bg-white/10 rounded-lg p-3">
               <p className="text-white/70 text-xs mb-1">ROI</p>
-              <p className="text-2xl font-bold text-green-300">{calculatedROI.toFixed(1)}%</p>
+              <p className="text-2xl font-bold text-green-300">{calculatedROI.toFixed(1)}x</p>
             </div>
           </div>
 
