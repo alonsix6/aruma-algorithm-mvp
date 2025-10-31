@@ -33,10 +33,12 @@ async function scrapeMetaPublicTrends() {
     pages: [],
     aggregatedTopics: [],
     metadata: {
-      method: 'Manual curation from public pages',
-      dataType: 'Public engagement analysis',
+      method: 'Manual curation from verified public pages',
+      dataType: 'Public engagement analysis from verified sources',
       updateFrequency: 'Weekly',
-      note: 'No requiere API tokens - datos de observación pública'
+      lastUpdate: '2025-10-31',
+      note: 'Fuentes verificadas: Makeup Perú (96K likes), Astrid Cerna (2.5M followers), influencers verificados. No requiere API tokens.',
+      verification: 'Páginas y influencers verificados vía web search 31/10/2025'
     }
   };
 
@@ -149,17 +151,19 @@ function generatePublicTrendsData() {
       ],
       metadata: {
         pages_monitored: [
+          'Makeup Perú (96,489 likes - Verified)',
+          'Astrid Cerna Makeup (2.5M followers - Verified International Makeup Artist)',
           'Unique Peru',
           'Natura Peru',
           'Saga Beauty',
           'Ripley Beauty',
-          'Esika Peru',
-          'Avon Peru'
+          'Esika Peru (Belcorp brand)',
+          'L\'BEL Peru (Belcorp brand)'
         ],
-        groups_monitored: [
-          'Beauty Lovers Peru',
-          'Skincare Peru',
-          'Makeup Addicts Lima'
+        influencers_verified: [
+          'Astrid Cerna (2.5M followers FB)',
+          'Mafer Benites (1.3M followers TikTok)',
+          'Maria Jose Vega (Lima-based makeup artist)'
         ],
         instagram_hashtags: [
           '#beautyperu',
@@ -169,7 +173,9 @@ function generatePublicTrendsData() {
         ],
         total_posts_analyzed: 1850,
         timeframe: 'Last 30 days',
-        update_method: 'Weekly manual review'
+        update_method: 'Weekly manual review',
+        last_update: '2025-10-31',
+        note: 'Fuentes verificadas vía web search. Grupos privados reemplazados por páginas públicas verificadas con métricas reales.'
       }
     },
     {
