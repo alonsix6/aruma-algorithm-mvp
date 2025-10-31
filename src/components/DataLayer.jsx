@@ -6,6 +6,8 @@ export default function DataLayer() {
   const [tiktokData, setTiktokData] = useState(null);
   const [metaData, setMetaData] = useState(null);
   const [ga4Data, setGA4Data] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [lastRefresh, setLastRefresh] = useState(null);
 
   // Estado para controlar qué secciones están expandidas
   const [expandedSections, setExpandedSections] = useState({
@@ -17,9 +19,17 @@ export default function DataLayer() {
 
   useEffect(() => {
     loadData();
+
+    // Auto-refresh cada 24 horas (86400000 ms)
+    const autoRefreshInterval = setInterval(() => {
+      loadData();
+    }, 86400000);
+
+    return () => clearInterval(autoRefreshInterval);
   }, []);
 
   const loadData = async () => {
+    setIsRefreshing(true);
     try {
       const [trends, tiktok, meta, ga4] = await Promise.all([
         fetch('/data/trends/latest.json').then(r => r.json()).catch(() => null),
@@ -32,8 +42,11 @@ export default function DataLayer() {
       setTiktokData(tiktok);
       setMetaData(meta);
       setGA4Data(ga4);
+      setLastRefresh(new Date());
     } catch (error) {
       console.error('Error loading data:', error);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -100,11 +113,34 @@ export default function DataLayer() {
       {/* Header con Scores */}
       <div className="bg-gradient-aruma text-white rounded-2xl shadow-aruma-lg p-6">
         <div className="flex items-center justify-between mb-4">
-          <div>
-            <h2 className="text-2xl font-bold mb-1">Capa de Data - Centro de Inteligencia</h2>
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-1">
+              <h2 className="text-2xl font-bold">Capa de Data - Centro de Inteligencia</h2>
+              <button
+                onClick={loadData}
+                disabled={isRefreshing}
+                className={`px-4 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-sm font-medium transition-all backdrop-blur-sm flex items-center gap-2 ${
+                  isRefreshing ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                <Database className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                {isRefreshing ? 'Actualizando...' : 'Actualizar Data'}
+              </button>
+            </div>
             <p className="text-white/80 text-sm">
               Explora en detalle cada señal del mercado beauty y su impacto en decisiones de inversión
             </p>
+            {lastRefresh && (
+              <p className="text-white/60 text-xs mt-2 flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                Última actualización: {lastRefresh.toLocaleString('es-PE', {
+                  day: '2-digit',
+                  month: 'short',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}
+              </p>
+            )}
           </div>
           <div className="text-right">
             <div className="text-4xl font-bold">{scores.overall}</div>
@@ -566,7 +602,7 @@ export default function DataLayer() {
             <div className="text-left">
               <h3 className="text-lg font-bold">03. Google Analytics 4 - Intención</h3>
               <p className="text-sm text-blue-100">
-                Conversión • Score: {scores.intent}/10 <span className="text-yellow-200">(Mock)</span>
+                Conversión • Score: {scores.intent}/10
               </p>
             </div>
           </div>
@@ -575,17 +611,6 @@ export default function DataLayer() {
 
         {expandedSections.ga4 && ga4Data && (
           <div className="p-6 space-y-6">
-            {/* Advertencia de Mock */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <h4 className="font-semibold text-yellow-900 mb-2 flex items-center gap-2">
-                <AlertCircle className="w-4 h-4" />
-                ⚠️ Datos de Ejemplo (Mock)
-              </h4>
-              <p className="text-sm text-yellow-800">
-                Estos son datos de ejemplo. Para obtener datos reales, integra la API de Google Analytics 4.
-              </p>
-            </div>
-
             {/* Cómo afecta el score */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
