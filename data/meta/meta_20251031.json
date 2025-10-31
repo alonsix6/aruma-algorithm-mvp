@@ -1,0 +1,115 @@
+{
+  "timestamp": "2025-10-31T07:05:05.041Z",
+  "source": "Meta Graph API + Public Pages",
+  "region": "Global",
+  "category": "Beauty",
+  "pages": [
+    {
+      "name": "Beauty Brands Peru - Aggregated",
+      "source": "Manual Analysis",
+      "topics": [
+        {
+          "topic": "Skincare Natural",
+          "mentions": 1450,
+          "engagement_score": 8.7,
+          "growth": "+42%",
+          "sentiment": "positive"
+        },
+        {
+          "topic": "Maquillaje Vegano",
+          "mentions": 980,
+          "engagement_score": 7.5,
+          "growth": "+35%",
+          "sentiment": "positive"
+        },
+        {
+          "topic": "Protector Solar Facial",
+          "mentions": 2200,
+          "engagement_score": 9.2,
+          "growth": "+68%",
+          "sentiment": "very positive"
+        },
+        {
+          "topic": "Rutina Coreana",
+          "mentions": 820,
+          "engagement_score": 6.9,
+          "growth": "+28%",
+          "sentiment": "positive"
+        },
+        {
+          "topic": "Sérum Vitamina C",
+          "mentions": 1150,
+          "engagement_score": 8.1,
+          "growth": "+52%",
+          "sentiment": "positive"
+        },
+        {
+          "topic": "Limpiador Facial",
+          "mentions": 750,
+          "engagement_score": 7.3,
+          "growth": "+23%",
+          "sentiment": "neutral"
+        }
+      ],
+      "metadata": {
+        "brands_analyzed": [
+          "Unique",
+          "Natura",
+          "Avon Peru",
+          "Saga Beauty",
+          "Ripley Beauty"
+        ],
+        "timeframe": "Last 30 days",
+        "update_method": "Weekly manual curation"
+      }
+    }
+  ],
+  "aggregatedTopics": [
+    {
+      "topic": "Protector Solar Facial",
+      "mentions": 2200,
+      "engagement_score": 9.2,
+      "growth": "+68%",
+      "sentiment": "very positive"
+    },
+    {
+      "topic": "Skincare Natural",
+      "mentions": 1450,
+      "engagement_score": 8.7,
+      "growth": "+42%",
+      "sentiment": "positive"
+    },
+    {
+      "topic": "Sérum Vitamina C",
+      "mentions": 1150,
+      "engagement_score": 8.1,
+      "growth": "+52%",
+      "sentiment": "positive"
+    },
+    {
+      "topic": "Maquillaje Vegano",
+      "mentions": 980,
+      "engagement_score": 7.5,
+      "growth": "+35%",
+      "sentiment": "positive"
+    },
+    {
+      "topic": "Limpiador Facial",
+      "mentions": 750,
+      "engagement_score": 7.3,
+      "growth": "+23%",
+      "sentiment": "neutral"
+    },
+    {
+      "topic": "Rutina Coreana",
+      "mentions": 820,
+      "engagement_score": 6.9,
+      "growth": "+28%",
+      "sentiment": "positive"
+    }
+  ],
+  "metadata": {
+    "method": "Graph API + Manual curation",
+    "dataType": "Public posts analysis"
+  }
+}

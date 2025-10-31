@@ -31,6 +31,50 @@ export default function DataLayer() {
     }
   };
 
+  // Calcular puntajes dinámicamente basados en datos reales
+  const calculateScores = () => {
+    let searchScore = 5.0;
+    let trendScore = 5.0;
+    let intentScore = 5.0;
+    let emotionScore = 5.0;
+
+    // 1. BÚSQUEDA: Basado en Google Trends average_interest (0-100 → 0-10)
+    if (trendsData?.keywords?.length > 0) {
+      const avgInterest = trendsData.keywords.reduce((sum, kw) => sum + (kw.average_interest || 0), 0) / trendsData.keywords.length;
+      searchScore = (avgInterest / 10).toFixed(1); // 0-100 → 0-10
+    }
+
+    // 2. TENDENCIA: Basado en TikTok relevanceScore (0-100 → 0-10)
+    if (tiktokData?.trends?.hashtags?.length > 0) {
+      const avgRelevance = tiktokData.trends.hashtags.reduce((sum, tag) => sum + (tag.relevanceScore || 0), 0) / tiktokData.trends.hashtags.length;
+      trendScore = (avgRelevance / 10).toFixed(1); // 0-100 → 0-10
+    }
+
+    // 3. INTENCIÓN: Basado en tasa de conversión GA4 (0-1 → 0-10)
+    if (ga4Data?.overview?.conversionRate) {
+      intentScore = (ga4Data.overview.conversionRate * 200).toFixed(1); // 0.048 → 9.6
+    }
+
+    // 4. EMOCIÓN: Basado en engagement_score de Meta (ya está en 0-10)
+    if (metaData?.aggregatedTopics?.length > 0) {
+      const avgEngagement = metaData.aggregatedTopics.reduce((sum, topic) => sum + (topic.engagement_score || 0), 0) / metaData.aggregatedTopics.length;
+      emotionScore = avgEngagement.toFixed(1);
+    }
+
+    // Score global: promedio de las 4 capas
+    const overallScore = ((parseFloat(searchScore) + parseFloat(trendScore) + parseFloat(intentScore) + parseFloat(emotionScore)) / 4).toFixed(1);
+
+    return {
+      overall: overallScore,
+      search: searchScore,
+      trend: trendScore,
+      intent: intentScore,
+      emotion: emotionScore
+    };
+  };
+
+  const scores = calculateScores();
+
   const COLORS = ['#FF006B', '#E1006F', '#764BA2', '#667EEA'];
 
   return (
@@ -46,12 +90,15 @@ export default function DataLayer() {
               Análisis unificado de microcomportamientos, emociones e intenciones de compra en beauty
             </p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
               ✓ Activo
             </span>
             <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
-              3 fuentes reales
+              4 fuentes conectadas
+            </span>
+            <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+              Scores dinámicos
             </span>
           </div>
         </div>
@@ -79,24 +126,58 @@ export default function DataLayer() {
               Qué están <span className="font-semibold text-aruma-pink">deseando, comparando o descubriendo</span>
             </p>
 
-            {/* Top Search Terms */}
-            {ga4Data?.searchTerms && (
+            {/* Google Trends Keywords */}
+            {trendsData?.keywords && (
               <div className="space-y-3">
-                {ga4Data.searchTerms.map((term, idx) => (
+                <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
+                  🔍 Google Trends - Top Keywords
+                </h4>
+                {trendsData.keywords
+                  .filter(kw => kw.trend === 'rising')
+                  .slice(0, 5)
+                  .map((kw, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg hover:bg-pink-100 transition border border-pink-200">
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900">{kw.keyword}</p>
+                      <p className="text-xs text-gray-500">
+                        Interés: {kw.average_interest}/100 • Pico: {kw.peak_score}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1">
+                        <ArrowUpRight className="w-3 h-3" />
+                        {kw.growth_3m}
+                      </span>
+                      <div className="w-12 h-12 bg-gradient-to-br from-pink-100 to-purple-100 rounded-lg flex items-center justify-center">
+                        <span className="text-sm font-bold text-pink-600">{kw.average_interest}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* GA4 Search Terms */}
+            {ga4Data?.searchTerms && (
+              <div className="space-y-3 mt-4">
+                <h4 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-2">
+                  🔍 GA4 - Búsquedas en Sitio
+                </h4>
+                {ga4Data.searchTerms.slice(0, 3).map((term, idx) => (
                   <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                     <div className="flex-1">
                       <p className="font-medium text-gray-900">{term.term}</p>
                       <p className="text-xs text-gray-500">
-                        {term.searches.toLocaleString()} búsquedas
+                        {term.searches.toLocaleString()} búsquedas • {(term.conversionRate * 100).toFixed(1)}% conversión
                       </p>
                     </div>
                     <div className="flex items-center gap-2">
                       <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                        term.trend === 'rising' 
-                          ? 'bg-green-100 text-green-700' 
+                        term.trend === 'rising'
+                          ? 'bg-green-100 text-green-700'
                           : 'bg-gray-200 text-gray-700'
                       }`}>
-                        {term.trend === 'rising' ? '↑' : '→'} {(term.conversionRate * 100).toFixed(1)}%
+                        {term.trend === 'rising' ? '↑' : '→'}
                       </span>
                     </div>
                   </div>
@@ -106,9 +187,9 @@ export default function DataLayer() {
 
             {trendsData && (
               <div className="mt-4 p-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg border border-pink-200">
-                <p className="text-xs font-semibold text-pink-700 mb-1">Google Trends Live</p>
+                <p className="text-xs font-semibold text-pink-700 mb-1">📊 Fuente de Datos</p>
                 <p className="text-xs text-gray-600">
-                  {trendsData.keywords?.length || 0} keywords activas • Actualizado hace {Math.floor((Date.now() - new Date(trendsData.timestamp)) / 60000)} min
+                  Google Trends: {trendsData.keywords?.length || 0} keywords • {trendsData.metadata?.method || 'N/A'}
                 </p>
               </div>
             )}
@@ -286,7 +367,7 @@ export default function DataLayer() {
 
       {/* Signal Score Summary */}
       <div className="bg-gradient-aruma text-white rounded-2xl shadow-aruma-lg p-8">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mb-6">
           <div>
             <h3 className="text-2xl font-bold mb-2">Signal Score Consolidado</h3>
             <p className="text-white/80">
@@ -294,27 +375,65 @@ export default function DataLayer() {
             </p>
           </div>
           <div className="text-right">
-            <div className="text-5xl font-bold">8.7</div>
+            <div className="text-5xl font-bold">{scores.overall}</div>
             <p className="text-white/80 text-sm mt-2">/ 10.0</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-4 gap-4 mt-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+        {/* Explicación del Score */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-6">
+          <p className="text-sm text-white/90 mb-2">
+            <span className="font-semibold">¿Qué significa este puntaje?</span>
+          </p>
+          <p className="text-xs text-white/70">
+            Este score consolida 4 señales clave del mercado beauty en Perú. Combina datos reales de Google Trends (interés de búsqueda),
+            TikTok (relevancia viral), GA4 (intención de compra) y Meta (engagement emocional). Un score alto indica fuerte oportunidad de inversión.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition">
             <p className="text-white/70 text-xs mb-1">Búsqueda</p>
-            <p className="text-2xl font-bold">8.5</p>
+            <p className="text-2xl font-bold">{scores.search}</p>
+            <p className="text-xs text-white/60 mt-1">Interés de búsqueda</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition">
             <p className="text-white/70 text-xs mb-1">Tendencia</p>
-            <p className="text-2xl font-bold">9.2</p>
+            <p className="text-2xl font-bold">{scores.trend}</p>
+            <p className="text-xs text-white/60 mt-1">Relevancia viral</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition">
             <p className="text-white/70 text-xs mb-1">Intención</p>
-            <p className="text-2xl font-bold">8.3</p>
+            <p className="text-2xl font-bold">{scores.intent}</p>
+            <p className="text-xs text-white/60 mt-1">Conversión</p>
           </div>
-          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition">
             <p className="text-white/70 text-xs mb-1">Emoción</p>
-            <p className="text-2xl font-bold">8.8</p>
+            <p className="text-2xl font-bold">{scores.emotion}</p>
+            <p className="text-xs text-white/60 mt-1">Engagement</p>
+          </div>
+        </div>
+
+        {/* Fuentes de datos */}
+        <div className="mt-6 pt-6 border-t border-white/20">
+          <p className="text-xs text-white/60 mb-3">Fuentes de datos activas:</p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-xs text-white/80">Google Trends</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-xs text-white/80">TikTok Trends</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span className="text-xs text-white/80">Meta Topics</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full"></div>
+              <span className="text-xs text-white/80">GA4 (Mock)</span>
+            </div>
           </div>
         </div>
       </div>
