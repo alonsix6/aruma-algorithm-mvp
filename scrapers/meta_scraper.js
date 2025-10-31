@@ -8,9 +8,12 @@ import axios from 'axios';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 
+// Cargar variables de entorno desde .env
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const GRAPH_API_VERSION = 'v21.0';
