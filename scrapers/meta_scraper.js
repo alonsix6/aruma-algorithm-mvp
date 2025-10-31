@@ -35,15 +35,50 @@ async function scrapeMetaTopics() {
     aggregatedTopics: [],
     metadata: {
       method: 'Graph API + Manual curation',
-      dataType: 'Public posts analysis'
+      dataType: 'Public posts analysis',
+      tokenStatus: 'not_configured'
     }
   };
 
   if (!ACCESS_TOKEN) {
-    console.warn('⚠️  META_ACCESS_TOKEN not found');
+    console.warn('⚠️  META_ACCESS_TOKEN not found in .env');
+    console.log('💡 Para obtener datos reales de Meta:');
+    console.log('   1. Ve a https://developers.facebook.com/tools/explorer/');
+    console.log('   2. Genera un token con permisos: pages_read_engagement, pages_show_list');
+    console.log('   3. Agrega META_ACCESS_TOKEN=tu_token al archivo .env');
+    console.log('');
     console.log('📊 Usando datos curados de análisis público...');
     results.pages = generateCuratedData();
     results.aggregatedTopics = aggregateTopics(results.pages);
+    results.metadata.tokenStatus = 'not_configured';
+    await saveResults(results);
+    return results;
+  }
+
+  // Verificar si el token es válido
+  try {
+    console.log('🔐 Verificando token de Meta Graph API...');
+    const verifyResponse = await axios.get(
+      `https://graph.facebook.com/${GRAPH_API_VERSION}/me`,
+      {
+        params: { access_token: ACCESS_TOKEN },
+        timeout: 5000
+      }
+    );
+    console.log(`✓ Token válido para usuario: ${verifyResponse.data.name || verifyResponse.data.id}`);
+    results.metadata.tokenStatus = 'valid';
+  } catch (error) {
+    console.error('❌ Token inválido o expirado');
+    console.log('💡 El token de Meta Graph API debe ser:');
+    console.log('   - Token de usuario de larga duración (60 días)');
+    console.log('   - Token de página (no expira)');
+    console.log('   - Generado en https://developers.facebook.com/tools/explorer/');
+    console.log('');
+    console.log('📊 Usando datos curados mientras tanto...');
+    results.pages = generateCuratedData();
+    results.aggregatedTopics = aggregateTopics(results.pages);
+    results.metadata.tokenStatus = 'invalid';
+    results.metadata.tokenError = error.response?.data?.error?.message || error.message;
     await saveResults(results);
     return results;
   }

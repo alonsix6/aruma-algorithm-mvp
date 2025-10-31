@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-31T07:05:05.041Z",
+  "timestamp": "2025-10-31T07:20:50.946Z",
   "source": "Meta Graph API + Public Pages",
   "region": "Global",
   "category": "Beauty",
@@ -110,6 +110,8 @@
   ],
   "metadata": {
     "method": "Graph API + Manual curation",
-    "dataType": "Public posts analysis"
+    "dataType": "Public posts analysis",
+    "tokenStatus": "invalid",
+    "tokenError": "Request failed with status code 403"
   }
 }
