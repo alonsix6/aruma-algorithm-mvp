@@ -1,0 +1,25 @@
+{
+  "name": "aruma-scrapers",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Data scrapers for Aruma Algorithm MVP",
+  "main": "index.js",
+  "scripts": {
+    "scrape:all": "node tiktok_scraper.js && node meta_scraper.js",
+    "scrape:tiktok": "node tiktok_scraper.js",
+    "scrape:meta": "node meta_scraper.js",
+    "scrape:trends": "python google_trends.py"
+  },
+  "keywords": [
+    "scraper",
+    "beauty",
+    "data",
+    "aruma"
+  ],
+  "author": "Reset",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
