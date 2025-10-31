@@ -5,41 +5,40 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, R
 const PEN_TO_USD = 3.5;
 
 export default function OptimizationLayer() {
+  // Performance últimos 7 días con fechas reales y datos más aterrizados
   const performanceData = [
-    { day: 'Lun', roas: 2.8, conversions: 45, spent: 850 },
-    { day: 'Mar', roas: 3.1, conversions: 52, spent: 920 },
-    { day: 'Mié', roas: 3.4, conversions: 58, spent: 980 },
-    { day: 'Jue', roas: 3.6, conversions: 64, spent: 1050 },
-    { day: 'Vie', roas: 3.8, conversions: 72, spent: 1150 },
-    { day: 'Sáb', roas: 3.5, conversions: 68, spent: 1100 },
-    { day: 'Dom', roas: 3.2, conversions: 58, spent: 1020 }
+    { date: '25 Oct', roas: 2.1, conversions: 38, spent: 1620 },
+    { date: '26 Oct', roas: 1.9, conversions: 42, spent: 1850 },
+    { date: '27 Oct', roas: 2.3, conversions: 45, spent: 1720 },
+    { date: '28 Oct', roas: 2.6, conversions: 51, spent: 1680 },
+    { date: '29 Oct', roas: 2.4, conversions: 48, spent: 1790 },
+    { date: '30 Oct', roas: 2.8, conversions: 54, spent: 1650 },
+    { date: '31 Oct', roas: 2.5, conversions: 49, spent: 1740 }
   ];
 
-  // Cálculo de ROI real con conversión PEN a USD
-  // ROI = ((Revenue en PEN / PEN_TO_USD) - Investment en USD) / Investment en USD * 100
+  // Cálculo de ROI como multiplicador (no porcentaje)
+  // ROI = Revenue / Investment
+  // Ejemplo: Investment $12,000, Revenue $32,400 USD → ROI = 2.7x
   const calculateROI = (revenuePEN, investmentUSD) => {
     const revenueUSD = revenuePEN / PEN_TO_USD;
-    const roi = ((revenueUSD - investmentUSD) / investmentUSD) * 100;
+    const roi = revenueUSD / investmentUSD;
     return roi;
   };
 
-  // Ejemplo con ROI positivo: Revenue S/ 95,000 / Investment $ 15,800
-  // Con ROAS promedio 3.4x: $15,800 * 3.4 = $53,720 revenue esperado en USD
-  // Si revenue se genera en PEN: $53,720 * 3.5 = S/ 188,020
-  // Usando S/ 95,000 para ser conservador: ROI = +71.9%
-  const exampleRevenuePEN = 95000;
-  const exampleInvestmentUSD = 15800;
+  // ROI de 2.7x: Investment $12,000 → Revenue debe ser $32,400 USD = S/ 113,400
+  const exampleRevenuePEN = 113400;
+  const exampleInvestmentUSD = 12000;
   const calculatedROI = calculateROI(exampleRevenuePEN, exampleInvestmentUSD);
-  const roiScore = Math.min(10, Math.max(0, calculatedROI / 10)).toFixed(1); // Normalizado a escala 0-10
+  const roiScore = Math.min(10, calculatedROI * 2.5).toFixed(1); // Normalizado: 2.7 * 2.5 = 6.75 ≈ 6.8
 
   const signalScore = {
-    current: 8.7,
-    previous: 8.2,
+    current: 7.2,
+    previous: 6.8,
     components: [
       { name: 'ROI', score: parseFloat(roiScore), weight: 0.35, trend: 'up' },
-      { name: 'CTR', score: 8.5, weight: 0.25, trend: 'up' },
-      { name: 'Engagement Rate', score: 8.8, weight: 0.25, trend: 'stable' },
-      { name: 'Tiempo Activo', score: 8.3, weight: 0.15, trend: 'up' }
+      { name: 'CTR', score: 7.1, weight: 0.25, trend: 'up' },
+      { name: 'Engagement Rate', score: 7.5, weight: 0.25, trend: 'stable' },
+      { name: 'Tiempo Activo', score: 6.9, weight: 0.15, trend: 'up' }
     ]
   };
 
@@ -156,7 +155,7 @@ export default function OptimizationLayer() {
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={performanceData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="day" stroke="#9ca3af" />
+              <XAxis dataKey="date" stroke="#9ca3af" />
               <YAxis stroke="#9ca3af" />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#fff', border: '1px solid #e5e7eb', borderRadius: '8px' }}
