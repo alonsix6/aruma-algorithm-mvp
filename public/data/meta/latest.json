@@ -141,6 +141,14 @@
           "growth": "+45%",
           "sentiment": "very positive",
           "discussion_volume": "high",
+          "top_brands": [
+            "COSRX",
+            "Some By Mi",
+            "Innisfree"
+          ],
+          "avg_reactions": 295,
+          "avg_comments": 58,
+          "avg_shares": 64,
           "top_queries": [
             "dónde comprar",
             "recomendaciones",
@@ -154,6 +162,14 @@
           "growth": "+31%",
           "sentiment": "positive",
           "discussion_volume": "medium",
+          "top_brands": [
+            "The Ordinary",
+            "CeraVe",
+            "La Roche-Posay"
+          ],
+          "avg_reactions": 240,
+          "avg_comments": 42,
+          "avg_shares": 38,
           "top_queries": [
             "retinol",
             "ácido hialurónico",
@@ -221,6 +237,14 @@
       "growth": "+45%",
       "sentiment": "very positive",
       "discussion_volume": "high",
+      "top_brands": [
+        "COSRX",
+        "Some By Mi",
+        "Innisfree"
+      ],
+      "avg_reactions": 295,
+      "avg_comments": 58,
+      "avg_shares": 64,
       "top_queries": [
         "dónde comprar",
         "recomendaciones",
@@ -264,6 +288,14 @@
       "growth": "+31%",
       "sentiment": "positive",
       "discussion_volume": "medium",
+      "top_brands": [
+        "The Ordinary",
+        "CeraVe",
+        "La Roche-Posay"
+      ],
+      "avg_reactions": 240,
+      "avg_comments": 42,
+      "avg_shares": 38,
       "top_queries": [
         "retinol",
         "ácido hialurónico",
