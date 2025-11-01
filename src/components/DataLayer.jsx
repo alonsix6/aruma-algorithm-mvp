@@ -97,6 +97,96 @@ export default function DataLayer() {
 
   const scores = calculateScores();
 
+  // Generar insights dinámicos basados en los datos de cada fuente
+  const generateInsights = () => {
+    const insights = [];
+
+    // Insight de Google Trends
+    if (trendsData?.keywords?.length > 0) {
+      const topKeyword = trendsData.keywords.reduce((max, kw) =>
+        (kw.average_interest > (max?.average_interest || 0)) ? kw : max
+      , null);
+      if (topKeyword) {
+        insights.push({
+          source: 'Google Trends',
+          icon: '🔍',
+          color: 'from-pink-500 to-pink-600',
+          insight: `"${topKeyword.keyword}" lidera con ${topKeyword.average_interest}/100 de interés${topKeyword.growth_3m ? ` y ${topKeyword.growth_3m} de crecimiento` : ''}`,
+          action: 'Priorizar en campañas de búsqueda'
+        });
+      }
+    }
+
+    // Insight de TikTok
+    if (tiktokData?.trends?.hashtags?.length > 0) {
+      const topHashtag = tiktokData.trends.hashtags.reduce((max, tag) =>
+        (tag.relevanceScore > (max?.relevanceScore || 0)) ? tag : max
+      , null);
+      if (topHashtag) {
+        insights.push({
+          source: 'TikTok',
+          icon: '🎵',
+          color: 'from-purple-500 to-purple-600',
+          insight: `${topHashtag.hashtag} alcanzó ${topHashtag.views} views con ${topHashtag.relevanceScore}/100 de relevancia`,
+          action: 'Contenido viral activo - crear videos con este hashtag'
+        });
+      }
+    }
+
+    // Insight de Meta/Facebook
+    if (metaData?.aggregatedTopics?.length > 0) {
+      const topTopic = metaData.aggregatedTopics.reduce((max, topic) =>
+        (topic.engagement_score > (max?.engagement_score || 0)) ? topic : max
+      , null);
+      if (topTopic) {
+        insights.push({
+          source: 'Meta/Facebook',
+          icon: '💙',
+          color: 'from-rose-500 to-rose-600',
+          insight: `"${topTopic.topic}" genera ${topTopic.engagement_score}/10 de engagement con ${topTopic.mentions?.toLocaleString()} menciones`,
+          action: 'Audiencia altamente receptiva - expandir contenido'
+        });
+      }
+    }
+
+    // Insight de GA4
+    if (ga4Data?.overview) {
+      const convRate = (ga4Data.overview.conversionRate * 100).toFixed(1);
+      insights.push({
+        source: 'Google Analytics 4',
+        icon: '🛒',
+        color: 'from-blue-500 to-blue-600',
+        insight: `Tasa de conversión de ${convRate}% con ${ga4Data.overview.conversions?.toLocaleString()} conversiones`,
+        action: 'Alta intención de compra - optimizar checkout'
+      });
+    }
+
+    // Insight de conexión entre fuentes (si hay overlap en keywords/topics)
+    if (trendsData?.keywords?.length > 0 && metaData?.aggregatedTopics?.length > 0) {
+      const trendKeywords = trendsData.keywords.map(k => k.keyword.toLowerCase());
+      const metaTopics = metaData.aggregatedTopics.map(t => t.topic.toLowerCase());
+
+      // Buscar keywords que aparecen en ambos
+      const overlap = trendKeywords.find(keyword =>
+        metaTopics.some(topic => topic.includes(keyword.split(' ')[0]) || keyword.includes(topic.split(' ')[0]))
+      );
+
+      if (overlap) {
+        insights.push({
+          source: 'Conexión Multi-fuente',
+          icon: '🔗',
+          color: 'from-green-500 to-green-600',
+          insight: `Señales consistentes detectadas: búsquedas, engagement social y conversión alineados`,
+          action: 'Momento óptimo para invertir - todas las señales positivas'
+        });
+      }
+    }
+
+    return insights;
+  };
+
+  const insights = generateInsights();
+
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
@@ -168,6 +258,45 @@ export default function DataLayer() {
           </div>
         </div>
       </div>
+
+      {/* Insights Clave - Resumen Dinámico */}
+      {insights.length > 0 && (
+        <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+          <div className="mb-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">📊 Insights Clave del Mercado</h3>
+            <p className="text-sm text-gray-600">
+              Conexiones automáticas entre fuentes de datos - Análisis en tiempo real
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {insights.map((insight, idx) => (
+              <div
+                key={idx}
+                className={`p-5 rounded-xl bg-gradient-to-r ${insight.color} text-white shadow-md hover:shadow-lg transition-shadow`}
+              >
+                <div className="flex items-start gap-3 mb-3">
+                  <span className="text-2xl flex-shrink-0">{insight.icon}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
+                      {insight.source}
+                    </p>
+                    <p className="text-sm font-medium leading-relaxed break-words">
+                      {insight.insight}
+                    </p>
+                  </div>
+                </div>
+                <div className="ml-11 pt-3 border-t border-white/20">
+                  <p className="text-xs text-white/90 flex items-start gap-2">
+                    <span className="flex-shrink-0">→</span>
+                    <span className="break-words">{insight.action}</span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* 1. GOOGLE TRENDS - Expandible */}
       <div className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
