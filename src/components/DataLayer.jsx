@@ -112,7 +112,8 @@ export default function DataLayer() {
           icon: '🔍',
           color: 'from-pink-500 to-pink-600',
           insight: `"${topKeyword.keyword}" lidera con ${topKeyword.average_interest}/100 de interés${topKeyword.growth_3m ? ` y ${topKeyword.growth_3m} de crecimiento` : ''}`,
-          action: 'Priorizar en campañas de búsqueda'
+          action: 'Priorizar en campañas de búsqueda',
+          isWide: false
         });
       }
     }
@@ -128,7 +129,8 @@ export default function DataLayer() {
           icon: '🎵',
           color: 'from-purple-500 to-purple-600',
           insight: `${topHashtag.hashtag} alcanzó ${topHashtag.views} views con ${topHashtag.relevanceScore}/100 de relevancia`,
-          action: 'Contenido viral activo - crear videos con este hashtag'
+          action: 'Contenido viral activo - crear videos con este hashtag',
+          isWide: false
         });
       }
     }
@@ -144,7 +146,8 @@ export default function DataLayer() {
           icon: '💙',
           color: 'from-rose-500 to-rose-600',
           insight: `"${topTopic.topic}" genera ${topTopic.engagement_score}/10 de engagement con ${topTopic.mentions?.toLocaleString()} menciones`,
-          action: 'Audiencia altamente receptiva - expandir contenido'
+          action: 'Audiencia altamente receptiva - expandir contenido',
+          isWide: false
         });
       }
     }
@@ -157,11 +160,12 @@ export default function DataLayer() {
         icon: '🛒',
         color: 'from-blue-500 to-blue-600',
         insight: `Tasa de conversión de ${convRate}% con ${ga4Data.overview.conversions?.toLocaleString()} conversiones`,
-        action: 'Alta intención de compra - optimizar checkout'
+        action: 'Alta intención de compra - optimizar checkout',
+        isWide: false
       });
     }
 
-    // Insight de conexión entre fuentes (si hay overlap en keywords/topics)
+    // Insight de conexión entre fuentes (SIEMPRE AL FINAL para ocupar 2 columnas)
     if (trendsData?.keywords?.length > 0 && metaData?.aggregatedTopics?.length > 0) {
       const trendKeywords = trendsData.keywords.map(k => k.keyword.toLowerCase());
       const metaTopics = metaData.aggregatedTopics.map(t => t.topic.toLowerCase());
@@ -177,7 +181,8 @@ export default function DataLayer() {
           icon: '🔗',
           color: 'from-green-500 to-green-600',
           insight: `Señales consistentes detectadas: búsquedas, engagement social y conversión alineados`,
-          action: 'Momento óptimo para invertir - todas las señales positivas'
+          action: 'Momento óptimo para invertir - todas las señales positivas',
+          isWide: true // Ocupar 2 columnas
         });
       }
     }
@@ -273,25 +278,51 @@ export default function DataLayer() {
             {insights.map((insight, idx) => (
               <div
                 key={idx}
-                className={`p-5 rounded-xl bg-gradient-to-r ${insight.color} text-white shadow-md hover:shadow-lg transition-shadow`}
+                className={`${insight.isWide ? 'md:col-span-2' : ''} p-5 rounded-xl bg-gradient-to-r ${insight.color} text-white shadow-md hover:shadow-lg transition-shadow`}
               >
-                <div className="flex items-start gap-3 mb-3">
-                  <span className="text-2xl flex-shrink-0">{insight.icon}</span>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
-                      {insight.source}
-                    </p>
-                    <p className="text-sm font-medium leading-relaxed break-words">
-                      {insight.insight}
-                    </p>
+                {insight.isWide ? (
+                  // Layout horizontal para insights anchos (multi-fuente)
+                  <div className="flex flex-col sm:flex-row items-start gap-4">
+                    <div className="flex items-start gap-3 flex-1">
+                      <span className="text-3xl flex-shrink-0">{insight.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
+                          {insight.source}
+                        </p>
+                        <p className="text-sm sm:text-base font-medium leading-relaxed break-words">
+                          {insight.insight}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="pl-0 sm:pl-4 sm:border-l sm:border-white/20 w-full sm:w-auto sm:min-w-[240px]">
+                      <p className="text-xs text-white/90 flex items-start gap-2">
+                        <span className="flex-shrink-0">→</span>
+                        <span className="break-words font-medium">{insight.action}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="ml-11 pt-3 border-t border-white/20">
-                  <p className="text-xs text-white/90 flex items-start gap-2">
-                    <span className="flex-shrink-0">→</span>
-                    <span className="break-words">{insight.action}</span>
-                  </p>
-                </div>
+                ) : (
+                  // Layout vertical para insights normales
+                  <>
+                    <div className="flex items-start gap-3 mb-3">
+                      <span className="text-2xl flex-shrink-0">{insight.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
+                          {insight.source}
+                        </p>
+                        <p className="text-sm font-medium leading-relaxed break-words">
+                          {insight.insight}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="ml-11 pt-3 border-t border-white/20">
+                      <p className="text-xs text-white/90 flex items-start gap-2">
+                        <span className="flex-shrink-0">→</span>
+                        <span className="break-words">{insight.action}</span>
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
