@@ -626,27 +626,19 @@ export default function DataLayer() {
             {metaData.pages?.[0]?.metadata && (
               <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
                 <h4 className="font-semibold text-rose-900 mb-3">📍 Fuentes Monitoreadas</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Páginas FB:</p>
                     <ul className="text-rose-800 space-y-1 text-xs">
-                      {metaData.pages[0].metadata.pages_monitored?.slice(0, 3).map((page, idx) => (
+                      {metaData.pages[0].metadata.pages_monitored?.slice(0, 4).map((page, idx) => (
                         <li key={idx} className="break-words">• {page}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-rose-700 font-medium mb-2">Grupos FB:</p>
-                    <ul className="text-rose-800 space-y-1 text-xs">
-                      {metaData.pages[0].metadata.groups_monitored?.map((group, idx) => (
-                        <li key={idx} className="break-words">• {group}</li>
                       ))}
                     </ul>
                   </div>
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Hashtags IG:</p>
                     <ul className="text-rose-800 space-y-1 text-xs">
-                      {metaData.pages[0].metadata.instagram_hashtags?.slice(0, 3).map((tag, idx) => (
+                      {metaData.pages[0].metadata.instagram_hashtags?.map((tag, idx) => (
                         <li key={idx} className="break-words">• {tag}</li>
                       ))}
                     </ul>
@@ -721,33 +713,6 @@ export default function DataLayer() {
               </div>
             </div>
 
-            {/* Métricas de engagement detalladas */}
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-3">📊 Métricas de Engagement Detalladas</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {metaData.aggregatedTopics?.slice(0, 6).map((topic, idx) => (
-                  <div key={idx} className="bg-rose-50 rounded-lg p-4">
-                    <p className="font-semibold text-rose-900 text-sm mb-3">{topic.topic}</p>
-                    {topic.avg_reactions && (
-                      <div className="space-y-2 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-rose-700">Reactions:</span>
-                          <span className="text-rose-900 font-semibold">{topic.avg_reactions}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-rose-700">Comments:</span>
-                          <span className="text-rose-900 font-semibold">{topic.avg_comments}</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-rose-700">Shares:</span>
-                          <span className="text-rose-900 font-semibold">{topic.avg_shares}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         )}
       </div>
