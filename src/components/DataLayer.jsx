@@ -589,7 +589,7 @@ export default function DataLayer() {
           <div className="flex items-center gap-3">
             <Heart className="w-6 h-6" />
             <div className="text-left">
-              <h3 className="text-lg font-bold">04. Meta/Facebook - Emoción</h3>
+              <h3 className="text-lg font-bold">03. Meta/Facebook - Emoción</h3>
               <p className="text-sm text-rose-100">
                 {metaData?.aggregatedTopics?.length || 0} topics • Score: {scores.emotion}/10
               </p>
@@ -761,7 +761,7 @@ export default function DataLayer() {
           <div className="flex items-center gap-3">
             <ShoppingCart className="w-6 h-6" />
             <div className="text-left">
-              <h3 className="text-lg font-bold">03. Google Analytics 4 - Intención</h3>
+              <h3 className="text-lg font-bold">04. Google Analytics 4 - Intención</h3>
               <p className="text-sm text-blue-100">
                 Conversión • Score: {scores.intent}/10
               </p>
