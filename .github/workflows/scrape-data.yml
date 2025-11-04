@@ -2,9 +2,9 @@ name: Scrape Beauty Data - Aruma Algorithm
 
 # Trigger del workflow
 on:
-  # Ejecutar cada hora en punto
+  # Ejecutar cada lunes a las 9 AM UTC
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 9 * * 1'
   
   # Permitir ejecución manual desde GitHub Actions UI
   workflow_dispatch:
@@ -127,7 +127,7 @@ jobs:
         if: success()
         run: |
           echo "✅ Scraping completado exitosamente"
-          echo "⏰ Próxima ejecución: En 1 hora"
+          echo "⏰ Próxima ejecución: Próximo lunes a las 9 AM UTC"
       
       # 13. Notificación de error
       - name: ❌ Error notification
