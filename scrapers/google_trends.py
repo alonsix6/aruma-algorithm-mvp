@@ -100,8 +100,8 @@ def generate_curated_trends_data():
 def fetch_trends_data():
     """Obtiene datos de Google Trends para beauty keywords"""
 
-    print("🔍 Iniciando scraping de Google Trends...")
-    print(f"📍 Región: {REGION}")
+    print("[SEARCH] Iniciando scraping de Google Trends...")
+    print(f"[REGION] Región: {REGION}")
 
     results = {
         'timestamp': datetime.now().isoformat(),
@@ -124,7 +124,7 @@ def fetch_trends_data():
             batch = BEAUTY_KEYWORDS[i:i+5]
 
             try:
-                print(f"\n📊 Procesando: {', '.join(batch)}")
+                print(f"\n[INFO] Procesando: {', '.join(batch)}")
 
                 pytrends.build_payload(
                     kw_list=batch,
@@ -192,26 +192,26 @@ def fetch_trends_data():
                             keyword_data['rising_queries'] = rising_df.head(5)['query'].tolist()
 
                     results['keywords'].append(keyword_data)
-                    print(f"  ✓ {keyword}: avg interest = {keyword_data['average_interest']}, trend = {keyword_data['trend']}")
+                    print(f"  [OK] {keyword}: avg interest = {keyword_data['average_interest']}, trend = {keyword_data['trend']}")
 
                 # Esperar para evitar rate limit
                 time.sleep(3)
 
             except Exception as e:
-                print(f"  ⚠️ Error con {batch}: {e}")
+                print(f"  [WARN] Error con {batch}: {e}")
                 continue
 
     except Exception as e:
-        print(f"⚠️ Error en pytrends API: {e}")
-        print("📊 Usando datos curados de Google Trends...")
+        print(f"[WARN] Error en pytrends API: {e}")
+        print("[INFO] Usando datos curados de Google Trends...")
 
     # Si no se obtuvo data, usar datos curados
     if len(results['keywords']) == 0:
         results['keywords'] = generate_curated_trends_data()
         results['metadata']['method'] = 'Curated data (pytrends unavailable)'
-        print("✓ Usando datos curados de Google Trends")
+        print("[OK] Usando datos curados de Google Trends")
         for kw in results['keywords']:
-            print(f"  ✓ {kw['keyword']}: avg interest = {kw['average_interest']}, trend = {kw['trend']}, growth = {kw.get('growth_3m', 'N/A')}")
+            print(f"  [OK] {kw['keyword']}: avg interest = {kw['average_interest']}, trend = {kw['trend']}, growth = {kw.get('growth_3m', 'N/A')}")
     
     # Guardar resultados
     output_dir = os.path.join(os.path.dirname(__file__), '../data/trends')
@@ -228,9 +228,9 @@ def fetch_trends_data():
     with open(latest_file, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✅ Datos guardados en {output_file}")
-    print(f"✅ Latest: {latest_file}")
-    print(f"📈 Total keywords procesadas: {len(results['keywords'])}")
+    print(f"\n[OK] Datos guardados en {output_file}")
+    print(f"[OK] Latest: {latest_file}")
+    print(f"[STATS] Total keywords procesadas: {len(results['keywords'])}")
     
     return results
 
@@ -239,7 +239,7 @@ if __name__ == '__main__':
         fetch_trends_data()
         sys.exit(0)
     except Exception as e:
-        print(f"\n❌ Error fatal: {e}")
+        print(f"\n[ERROR] Error fatal: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

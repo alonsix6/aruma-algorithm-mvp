@@ -1,4 +1,4 @@
-import { TrendingUp, BarChart3, RefreshCw, Award } from 'lucide-react';
+import { TrendingUp, BarChart3, RefreshCw, Award, ArrowRightLeft, DollarSign, CheckCircle, Target } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Tasa de conversión PEN a USD para cálculos de ROI
@@ -179,8 +179,9 @@ export default function OptimizationLayer() {
         </h3>
 
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 mb-4">
-          <p className="text-white/90 text-sm mb-3">
-            📊 <strong>Fórmula:</strong> ROI = (Revenue en S/ ÷ {PEN_TO_USD}) ÷ Inversión en $
+          <p className="text-white/90 text-sm mb-3 flex items-center gap-2">
+            <BarChart3 className="w-4 h-4" />
+            <strong>Fórmula:</strong> ROI = (Revenue en S/ ÷ {PEN_TO_USD}) ÷ Inversión en $
           </p>
           <p className="text-white/80 text-xs mb-3">
             Se expresa como multiplicador (ej: 2.7x significa que por cada $1 invertido, obtienes $2.7 de retorno)
@@ -202,14 +203,14 @@ export default function OptimizationLayer() {
           </div>
 
           <div className="mt-4 pt-4 border-t border-white/20">
-            <p className="text-white/80 text-xs">
-              💱 Tasa de conversión: S/ {PEN_TO_USD} = $ 1.00 USD
+            <p className="text-white/80 text-xs flex items-center gap-1">
+              <ArrowRightLeft className="w-3 h-3" /> Tasa de conversión: S/ {PEN_TO_USD} = $ 1.00 USD
             </p>
-            <p className="text-white/80 text-xs mt-1">
-              💰 Revenue en USD: $ {(exampleRevenuePEN / PEN_TO_USD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            <p className="text-white/80 text-xs mt-1 flex items-center gap-1">
+              <DollarSign className="w-3 h-3" /> Revenue en USD: $ {(exampleRevenuePEN / PEN_TO_USD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
             </p>
-            <p className="text-white/80 text-xs mt-1">
-              ✅ Ganancia neta: $ {((exampleRevenuePEN / PEN_TO_USD) - exampleInvestmentUSD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            <p className="text-white/80 text-xs mt-1 flex items-center gap-1">
+              <CheckCircle className="w-3 h-3" /> Ganancia neta: $ {((exampleRevenuePEN / PEN_TO_USD) - exampleInvestmentUSD).toLocaleString('en-US', { maximumFractionDigits: 0 })}
             </p>
           </div>
         </div>
@@ -250,7 +251,9 @@ export default function OptimizationLayer() {
                 </div>
               </div>
               <div className="pt-3 border-t border-purple-200">
-                <p className="text-sm text-green-700 font-semibold">📊 {move.impact}</p>
+                <p className="text-sm text-green-700 font-semibold flex items-center gap-1">
+                  <BarChart3 className="w-4 h-4" /> {move.impact}
+                </p>
               </div>
             </div>
           ))}
@@ -318,8 +321,9 @@ export default function OptimizationLayer() {
         </div>
 
         <div className="mt-8 p-4 bg-white/10 backdrop-blur-sm rounded-xl">
-          <p className="text-sm text-white/80">
-            🎯 <span className="font-semibold">Próxima optimización automática</span> en 45 minutos
+          <p className="text-sm text-white/80 flex items-center gap-2">
+            <Target className="w-4 h-4" />
+            <span className="font-semibold">Próxima optimización automática</span> en 45 minutos
           </p>
         </div>
       </div>

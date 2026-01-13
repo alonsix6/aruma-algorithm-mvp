@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function scrapeTikTokTrends() {
-  console.log('🎵 Iniciando scraping de TikTok Creative Center...');
+  console.log('[TIKTOK] Iniciando scraping de TikTok Creative Center...');
 
   const results = {
     timestamp: new Date().toISOString(),
@@ -38,7 +38,7 @@ async function scrapeTikTokTrends() {
     // TikTok Creative Center requiere JS rendering (Puppeteer/Playwright)
     // Para MVP usamos datos curados basados en análisis manual real
     
-    console.log('📊 Analizando tendencias de beauty en TikTok...');
+    console.log('[INFO] Analizando tendencias de beauty en TikTok...');
 
     // Datos verificados de TikTok Creative Center - Actualizado 31 Oct 2025
     // Basado en investigación de TikTok Creative Center + datos públicos verificados
@@ -184,15 +184,15 @@ async function scrapeTikTokTrends() {
       JSON.stringify(results, null, 2)
     );
 
-    console.log(`✅ Datos guardados en ${outputFile}`);
-    console.log(`✅ Latest: ${path.join(outputDir, 'latest.json')}`);
-    console.log(`📊 Hashtags analizados: ${results.trends.hashtags.length}`);
-    console.log(`🎵 Sounds trending: ${results.trends.sounds.length}`);
+    console.log(`[OK] Datos guardados en ${outputFile}`);
+    console.log(`[OK] Latest: ${path.join(outputDir, 'latest.json')}`);
+    console.log(`[INFO] Hashtags analizados: ${results.trends.hashtags.length}`);
+    console.log(`[TIKTOK] Sounds trending: ${results.trends.sounds.length}`);
 
     return results;
 
   } catch (error) {
-    console.error('❌ Error en TikTok scraper:', error.message);
+    console.error('[ERROR] Error en TikTok scraper:', error.message);
     
     // En caso de error, guardar estructura básica
     const outputDir = path.join(__dirname, '../data/tiktok');
@@ -211,10 +211,10 @@ async function scrapeTikTokTrends() {
 // Ejecutar
 scrapeTikTokTrends()
   .then(() => {
-    console.log('\n✅ TikTok scraping completado');
+    console.log('\n[OK] TikTok scraping completado');
     process.exit(0);
   })
   .catch((error) => {
-    console.error('\n❌ TikTok scraping falló:', error);
+    console.error('\n[ERROR] TikTok scraping falló:', error);
     process.exit(1);
   });

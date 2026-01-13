@@ -21,14 +21,14 @@ jobs:
     
     steps:
       # 1. Checkout del código
-      - name: 📥 Checkout repository
+      - name: [CHECKOUT] Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
       
       # 2. Setup Python 3.10
-      - name: 🐍 Setup Python 3.10
+      - name: [PYTHON] Setup Python 3.10
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
@@ -36,7 +36,7 @@ jobs:
           cache-dependency-path: 'scrapers/requirements.txt'
       
       # 3. Setup Node.js 18
-      - name: 📦 Setup Node.js 18
+      - name: [PACKAGE] Setup Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: '18'
@@ -44,63 +44,63 @@ jobs:
           cache-dependency-path: 'scrapers/package-lock.json'
       
       # 4. Instalar dependencias Python
-      - name: 📚 Install Python dependencies
+      - name: [INSTALL] Install Python dependencies
         working-directory: ./scrapers
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
       
       # 5. Instalar dependencias Node
-      - name: 📦 Install Node.js dependencies
+      - name: [PACKAGE] Install Node.js dependencies
         working-directory: ./scrapers
         run: |
           npm ci
       
       # 6. Crear directorios de datos si no existen
-      - name: 📁 Create data directories
+      - name: [MKDIR] Create data directories
         run: |
           mkdir -p data/trends
           mkdir -p data/tiktok
           mkdir -p data/meta
       
       # 7. Ejecutar scraper de Google Trends
-      - name: 🔍 Run Google Trends Scraper
+      - name: [SEARCH] Run Google Trends Scraper
         working-directory: ./scrapers
         run: |
-          echo "🔍 Scraping Google Trends..."
+          echo "[SEARCH] Scraping Google Trends..."
           python google_trends.py
         env:
           REGION: PE
         continue-on-error: true
       
       # 8. Ejecutar scraper de TikTok
-      - name: 🎵 Run TikTok Scraper
+      - name: [TIKTOK] Run TikTok Scraper
         working-directory: ./scrapers
         run: |
-          echo "🎵 Scraping TikTok Creative Center..."
+          echo "[TIKTOK] Scraping TikTok Creative Center..."
           node tiktok_scraper.js
         continue-on-error: true
       
       # 9. Ejecutar scraper de Meta
-      - name: 📘 Run Meta Graph API Scraper
+      - name: [META] Run Meta Graph API Scraper
         working-directory: ./scrapers
         run: |
-          echo "📘 Scraping Meta Graph API..."
+          echo "[META] Scraping Meta Graph API..."
           node meta_scraper.js
         env:
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
         continue-on-error: true
       
       # 10. Verificar archivos generados
-      - name: 📊 Check generated files
+      - name: [DATA] Check generated files
         run: |
-          echo "📊 Verificando archivos generados..."
-          ls -lah data/trends/ || echo "⚠️ No trends data"
-          ls -lah data/tiktok/ || echo "⚠️ No tiktok data"
-          ls -lah data/meta/ || echo "⚠️ No meta data"
+          echo "[DATA] Verificando archivos generados..."
+          ls -lah data/trends/ || echo "[WARN] No trends data"
+          ls -lah data/tiktok/ || echo "[WARN] No tiktok data"
+          ls -lah data/meta/ || echo "[WARN] No meta data"
       
       # 11. Commit y push de los datos
-      - name: 💾 Commit and push data
+      - name: [SAVE] Commit and push data
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "Aruma Algorithm Bot"
@@ -110,28 +110,28 @@ jobs:
           
           # Verificar si hay cambios
           if git diff --staged --quiet; then
-            echo "✅ No hay cambios en los datos"
+            echo "[OK] No hay cambios en los datos"
           else
             # Commit con timestamp
             TIMESTAMP=$(date +'%Y-%m-%d %H:%M UTC')
-            git commit -m "📊 Update data - $TIMESTAMP"
+            git commit -m "[DATA] Update data - $TIMESTAMP"
             
             # Push
             git push
             
-            echo "✅ Datos actualizados y pusheados"
+            echo "[OK] Datos actualizados y pusheados"
           fi
       
       # 12. Notificación de éxito
-      - name: ✅ Success notification
+      - name: [OK] Success notification
         if: success()
         run: |
-          echo "✅ Scraping completado exitosamente"
-          echo "⏰ Próxima ejecución: Próximo lunes a las 9 AM UTC"
+          echo "[OK] Scraping completado exitosamente"
+          echo "[SCHEDULE] Próxima ejecución: Próximo lunes a las 9 AM UTC"
       
       # 13. Notificación de error
-      - name: ❌ Error notification
+      - name: [ERROR] Error notification
         if: failure()
         run: |
-          echo "❌ Scraping falló"
-          echo "🔍 Revisa los logs arriba para más detalles"
+          echo "[ERROR] Scraping falló"
+          echo "[SEARCH] Revisa los logs arriba para más detalles"

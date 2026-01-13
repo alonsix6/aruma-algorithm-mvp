@@ -22,8 +22,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function scrapeMetaPublicTrends() {
-  console.log('📘 Iniciando scraping de tendencias públicas Meta/Facebook...');
-  console.log('📊 Método: Curación manual de páginas y grupos públicos de beauty');
+  console.log('[META] Iniciando scraping de tendencias públicas Meta/Facebook...');
+  console.log('[INFO] Método: Curación manual de páginas y grupos públicos de beauty');
 
   const results = {
     timestamp: new Date().toISOString(),
@@ -43,7 +43,7 @@ async function scrapeMetaPublicTrends() {
   };
 
   try {
-    console.log('🔍 Analizando tendencias de beauty en Facebook/Instagram público...');
+    console.log('[SCAN] Analizando tendencias de beauty en Facebook/Instagram público...');
 
     // Generar datos curados de tendencias públicas
     results.pages = generatePublicTrendsData();
@@ -53,7 +53,7 @@ async function scrapeMetaPublicTrends() {
     return results;
 
   } catch (error) {
-    console.error('❌ Error en Meta public trends scraper:', error.message);
+    console.error('[ERROR] Error en Meta public trends scraper:', error.message);
     results.error = error.message;
     await saveResults(results);
     return results;
@@ -240,13 +240,13 @@ async function saveResults(results) {
     JSON.stringify(results, null, 2)
   );
 
-  console.log(`✅ Datos guardados en ${outputFile}`);
-  console.log(`✅ Latest: ${path.join(outputDir, 'latest.json')}`);
-  console.log(`📊 Fuentes analizadas: ${results.pages.length}`);
-  console.log(`🔥 Top topics: ${results.aggregatedTopics.length}`);
+  console.log(`[OK] Datos guardados en ${outputFile}`);
+  console.log(`[OK] Latest: ${path.join(outputDir, 'latest.json')}`);
+  console.log(`[INFO] Fuentes analizadas: ${results.pages.length}`);
+  console.log(`[TOP] Top topics: ${results.aggregatedTopics.length}`);
 
   // Mostrar top 3 topics
-  console.log('\n🏆 Top 3 Tendencias:');
+  console.log('\n[RANK] Top 3 Tendencias:');
   results.aggregatedTopics.slice(0, 3).forEach((topic, idx) => {
     console.log(`  ${idx + 1}. ${topic.topic}: ${topic.engagement_score}/10 (${topic.growth} crecimiento)`);
   });
@@ -255,11 +255,11 @@ async function saveResults(results) {
 // Ejecutar
 scrapeMetaPublicTrends()
   .then(() => {
-    console.log('\n✅ Meta public trends scraping completado');
-    console.log('💡 Datos curados de observación pública - No requiere tokens');
+    console.log('\n[OK] Meta public trends scraping completado');
+    console.log('[NOTE] Datos curados de observación pública - No requiere tokens');
     process.exit(0);
   })
   .catch((error) => {
-    console.error('\n❌ Meta public trends scraping falló:', error);
+    console.error('\n[ERROR] Meta public trends scraping falló:', error);
     process.exit(1);
   });
