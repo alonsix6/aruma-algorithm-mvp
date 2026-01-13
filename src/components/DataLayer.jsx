@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, TrendingUp, ShoppingCart, Heart, ChevronDown, ChevronUp, Database, Clock, MapPin, TrendingDown, AlertCircle, CheckCircle, Info } from 'lucide-react';
+import { Search, TrendingUp, ShoppingCart, Heart, ChevronDown, ChevronUp, Database, Clock, MapPin, AlertCircle, Info, Music, Link2, BarChart3, FileText, ShoppingBag } from 'lucide-react';
 
 export default function DataLayer() {
   const [trendsData, setTrendsData] = useState(null);
@@ -109,7 +109,7 @@ export default function DataLayer() {
       if (topKeyword) {
         insights.push({
           source: 'Google Trends',
-          icon: '🔍',
+          iconComponent: Search,
           color: 'from-pink-500 to-pink-600',
           insight: `"${topKeyword.keyword}" lidera con ${topKeyword.average_interest}/100 de interés${topKeyword.growth_3m ? ` y ${topKeyword.growth_3m} de crecimiento` : ''}`,
           action: 'Priorizar en campañas de búsqueda',
@@ -126,7 +126,7 @@ export default function DataLayer() {
       if (topHashtag) {
         insights.push({
           source: 'TikTok',
-          icon: '🎵',
+          iconComponent: Music,
           color: 'from-purple-500 to-purple-600',
           insight: `${topHashtag.hashtag} alcanzó ${topHashtag.views} views con ${topHashtag.relevanceScore}/100 de relevancia`,
           action: 'Contenido viral activo - crear videos con este hashtag',
@@ -143,7 +143,7 @@ export default function DataLayer() {
       if (topTopic) {
         insights.push({
           source: 'Meta/Facebook',
-          icon: '💙',
+          iconComponent: Heart,
           color: 'from-rose-500 to-rose-600',
           insight: `"${topTopic.topic}" genera ${topTopic.engagement_score}/10 de engagement con ${topTopic.mentions?.toLocaleString()} menciones`,
           action: 'Audiencia altamente receptiva - expandir contenido',
@@ -157,7 +157,7 @@ export default function DataLayer() {
       const convRate = (ga4Data.overview.conversionRate * 100).toFixed(1);
       insights.push({
         source: 'Google Analytics 4',
-        icon: '🛒',
+        iconComponent: ShoppingCart,
         color: 'from-blue-500 to-blue-600',
         insight: `Tasa de conversión de ${convRate}% con ${ga4Data.overview.conversions?.toLocaleString()} conversiones`,
         action: 'Alta intención de compra - optimizar checkout',
@@ -178,7 +178,7 @@ export default function DataLayer() {
       if (overlap) {
         insights.push({
           source: 'Conexión Multi-fuente',
-          icon: '🔗',
+          iconComponent: Link2,
           color: 'from-green-500 to-green-600',
           insight: `Señales consistentes detectadas: búsquedas, engagement social y conversión alineados`,
           action: 'Momento óptimo para invertir - todas las señales positivas',
@@ -268,63 +268,73 @@ export default function DataLayer() {
       {insights.length > 0 && (
         <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
           <div className="mb-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-2">📊 Insights Clave del Mercado</h3>
+            <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+              <BarChart3 className="w-6 h-6 text-aruma-pink" />
+              Insights Clave del Mercado
+            </h3>
             <p className="text-sm text-gray-600">
               Conexiones automáticas entre fuentes de datos - Análisis en tiempo real
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {insights.map((insight, idx) => (
-              <div
-                key={idx}
-                className={`${insight.isWide ? 'md:col-span-2' : ''} p-5 rounded-xl bg-gradient-to-r ${insight.color} text-white shadow-md hover:shadow-lg transition-shadow`}
-              >
-                {insight.isWide ? (
-                  // Layout horizontal para insights anchos (multi-fuente)
-                  <div className="flex flex-col sm:flex-row items-start gap-4">
-                    <div className="flex items-start gap-3 flex-1">
-                      <span className="text-3xl flex-shrink-0">{insight.icon}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
-                          {insight.source}
-                        </p>
-                        <p className="text-sm sm:text-base font-medium leading-relaxed break-words">
-                          {insight.insight}
+            {insights.map((insight, idx) => {
+              const IconComponent = insight.iconComponent;
+              return (
+                <div
+                  key={idx}
+                  className={`${insight.isWide ? 'md:col-span-2' : ''} p-5 rounded-xl bg-gradient-to-r ${insight.color} text-white shadow-md hover:shadow-lg transition-shadow`}
+                >
+                  {insight.isWide ? (
+                    // Layout horizontal para insights anchos (multi-fuente)
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <IconComponent className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
+                            {insight.source}
+                          </p>
+                          <p className="text-sm sm:text-base font-medium leading-relaxed break-words">
+                            {insight.insight}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="pl-0 sm:pl-4 sm:border-l sm:border-white/20 w-full sm:w-auto sm:min-w-[240px]">
+                        <p className="text-xs text-white/90 flex items-start gap-2">
+                          <span className="flex-shrink-0">→</span>
+                          <span className="break-words font-medium">{insight.action}</span>
                         </p>
                       </div>
                     </div>
-                    <div className="pl-0 sm:pl-4 sm:border-l sm:border-white/20 w-full sm:w-auto sm:min-w-[240px]">
-                      <p className="text-xs text-white/90 flex items-start gap-2">
-                        <span className="flex-shrink-0">→</span>
-                        <span className="break-words font-medium">{insight.action}</span>
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  // Layout vertical para insights normales
-                  <>
-                    <div className="flex items-start gap-3 mb-3">
-                      <span className="text-2xl flex-shrink-0">{insight.icon}</span>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
-                          {insight.source}
-                        </p>
-                        <p className="text-sm font-medium leading-relaxed break-words">
-                          {insight.insight}
+                  ) : (
+                    // Layout vertical para insights normales
+                    <>
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <IconComponent className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-semibold text-white/80 mb-1 uppercase tracking-wide">
+                            {insight.source}
+                          </p>
+                          <p className="text-sm font-medium leading-relaxed break-words">
+                            {insight.insight}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="ml-13 pt-3 border-t border-white/20">
+                        <p className="text-xs text-white/90 flex items-start gap-2">
+                          <span className="flex-shrink-0">→</span>
+                          <span className="break-words">{insight.action}</span>
                         </p>
                       </div>
-                    </div>
-                    <div className="ml-11 pt-3 border-t border-white/20">
-                      <p className="text-xs text-white/90 flex items-start gap-2">
-                        <span className="flex-shrink-0">→</span>
-                        <span className="break-words">{insight.action}</span>
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
-            ))}
+                    </>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -385,8 +395,9 @@ export default function DataLayer() {
 
             {/* Tabla completa de keywords */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">
-                📊 Todas las Keywords ({trendsData.keywords?.length})
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <BarChart3 className="w-5 h-5 text-pink-500" />
+                Todas las Keywords ({trendsData.keywords?.length})
               </h4>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -434,7 +445,10 @@ export default function DataLayer() {
 
             {/* Regiones detalladas */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">🗺️ Distribución por Regiones (Top Keywords)</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-pink-500" />
+                Distribución por Regiones (Top Keywords)
+              </h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {trendsData.keywords?.slice(0, 4).map((kw, idx) => (
                   <div key={idx} className="bg-gray-50 rounded-lg p-4">
@@ -519,8 +533,9 @@ export default function DataLayer() {
 
             {/* Tabla completa de hashtags */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">
-                🎵 Todos los Hashtags Trending ({tiktokData.trends?.hashtags?.length})
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <Music className="w-5 h-5 text-purple-500" />
+                Todos los Hashtags Trending ({tiktokData.trends?.hashtags?.length})
               </h4>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -561,7 +576,10 @@ export default function DataLayer() {
             {/* Sounds Trending */}
             {tiktokData.trends?.sounds && (
               <div>
-                <h4 className="font-semibold text-gray-900 mb-3">🎶 Sounds Trending</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <Music className="w-5 h-5 text-purple-500" />
+                  Sounds Trending
+                </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {tiktokData.trends.sounds.map((sound, idx) => (
                     <div key={idx} className="bg-purple-50 rounded-lg p-4">
@@ -625,7 +643,10 @@ export default function DataLayer() {
             {/* Fuentes monitoreadas */}
             {metaData.pages?.[0]?.metadata && (
               <div className="bg-rose-50 border border-rose-200 rounded-lg p-4">
-                <h4 className="font-semibold text-rose-900 mb-3">📍 Fuentes Monitoreadas</h4>
+                <h4 className="font-semibold text-rose-900 mb-3 flex items-center gap-2">
+                  <MapPin className="w-4 h-4" />
+                  Fuentes Monitoreadas
+                </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                   <div>
                     <p className="text-rose-700 font-medium mb-2">Páginas FB:</p>
@@ -664,8 +685,9 @@ export default function DataLayer() {
 
             {/* Tabla completa de topics */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">
-                💙 Todos los Topics ({metaData.aggregatedTopics?.length})
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <Heart className="w-5 h-5 text-rose-500" />
+                Todos los Topics ({metaData.aggregatedTopics?.length})
               </h4>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
@@ -771,7 +793,10 @@ export default function DataLayer() {
 
             {/* Top Pages */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">📄 Top Pages por Conversión</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <FileText className="w-5 h-5 text-blue-500" />
+                Top Pages por Conversión
+              </h4>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="bg-gray-100">
@@ -802,7 +827,10 @@ export default function DataLayer() {
 
             {/* Search Terms */}
             <div>
-              <h4 className="font-semibold text-gray-900 mb-3">🔍 Búsquedas en Sitio</h4>
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                <Search className="w-5 h-5 text-blue-500" />
+                Búsquedas en Sitio
+              </h4>
               <div className="space-y-2">
                 {ga4Data.searchTerms?.map((term, idx) => (
                   <div key={idx} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
@@ -826,7 +854,10 @@ export default function DataLayer() {
             {/* Top Products */}
             {ga4Data.ecommerce?.topProducts && (
               <div>
-                <h4 className="font-semibold text-gray-900 mb-3">🛍️ Top Productos por Revenue</h4>
+                <h4 className="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                  <ShoppingBag className="w-5 h-5 text-blue-500" />
+                  Top Productos por Revenue
+                </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {ga4Data.ecommerce.topProducts.map((product, idx) => (
                     <div key={idx} className="bg-blue-50 rounded-lg p-4">

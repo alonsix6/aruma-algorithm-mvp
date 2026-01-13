@@ -1,4 +1,4 @@
-import { Target, Users, MessageSquare, TrendingUp } from 'lucide-react';
+import { Target, Users, MessageSquare, TrendingUp, Flame, Zap, BarChart3, CheckCircle } from 'lucide-react';
 
 export default function DecisionLayer() {
   const recommendations = [
@@ -98,12 +98,16 @@ export default function DecisionLayer() {
             }`}>
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-3">
-                  <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    rec.priority === 'high' 
-                      ? 'bg-red-200 text-red-800' 
+                  <span className={`px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 ${
+                    rec.priority === 'high'
+                      ? 'bg-red-200 text-red-800'
                       : 'bg-yellow-200 text-yellow-800'
                   }`}>
-                    {rec.priority === 'high' ? '🔥 ALTA' : '⚡ MEDIA'}
+                    {rec.priority === 'high' ? (
+                      <><Flame className="w-3 h-3" /> ALTA</>
+                    ) : (
+                      <><Zap className="w-3 h-3" /> MEDIA</>
+                    )}
                   </span>
                   <span className="text-xs font-semibold text-gray-600">{rec.category}</span>
                 </div>
@@ -114,7 +118,9 @@ export default function DecisionLayer() {
               </div>
               
               <p className="text-gray-900 font-medium mb-2">{rec.action}</p>
-              <p className="text-sm text-green-700 font-semibold">📊 {rec.impact}</p>
+              <p className="text-sm text-green-700 font-semibold flex items-center gap-1">
+                <BarChart3 className="w-4 h-4" /> {rec.impact}
+              </p>
             </div>
           ))}
         </div>
@@ -171,13 +177,17 @@ export default function DecisionLayer() {
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-2">Video 1: Descubrimiento</p>
             <p className="text-xl font-bold">"Descubre el poder del nuevo serum CeraVe"</p>
-            <p className="text-white/80 text-sm mt-3">✓ Para audiencia: Dermo Enthusiasts</p>
+            <p className="text-white/80 text-sm mt-3 flex items-center gap-1">
+              <CheckCircle className="w-4 h-4" /> Para audiencia: Dermo Enthusiasts
+            </p>
           </div>
-          
+
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5">
             <p className="text-white/80 text-sm mb-2">Carrusel: Rutina completa</p>
             <p className="text-xl font-bold">"Tu rutina dermo perfecta en 3 pasos"</p>
-            <p className="text-white/80 text-sm mt-3">✓ Para audiencia: Skincare Buyers</p>
+            <p className="text-white/80 text-sm mt-3 flex items-center gap-1">
+              <CheckCircle className="w-4 h-4" /> Para audiencia: Skincare Buyers
+            </p>
           </div>
         </div>
       </div>
